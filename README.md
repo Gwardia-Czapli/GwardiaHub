@@ -5,7 +5,7 @@
 We want to create website with Django, that will be useful to as many as three different user groups!
 
 - Our classmates
-- @Gwardia-Czapli/czlonek-gwardii,
+- [Gwardia Czapli](https://github.com/Gwardia-Czapli/) members
 - Genshin Impact players from both of above
 
 ### Modules
@@ -14,7 +14,7 @@ We want to create website with Django, that will be useful to as many as three d
   - information about lunch menu for given day,
   - calendar with events from Mobidziennik and other events, that our class want to include,
   - information about our homeworks with option to submit solution.
-- For @Gwardia-Czapli/czlonek-gwardii:
+- For [Gwardia Czapli](https://github.com/Gwardia-Czapli/) members:
   - information about next meetings,
   - place to submit feedback about meetings,
   - assignments given on meetings.
