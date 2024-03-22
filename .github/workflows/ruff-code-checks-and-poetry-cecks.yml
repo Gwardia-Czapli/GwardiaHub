@@ -7,18 +7,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-      - uses: chartboost/ruff-action@v1
         with:
-          args: --check .
-          fix_args: --fix .
-      - uses: stefanzweifel/git-auto-commit-action@v4
+          python-version: 3.11
+      - name: Check code with ruff
+        uses: chartboost/ruff-action@v1
         with:
-          commit_message: 'style fixes by ruff'
+          args: check
   poetry-checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-      - run:
+        with:
+          python-version: 3.11
+      - name: Run image
+        uses: abatilo/actions-poetry@v3
+        with:
+          poetry-version: 1.8
+      - name: Check dependencies with poetry
+        run:
           poetry update
-          poetry check
+          poetry checks
