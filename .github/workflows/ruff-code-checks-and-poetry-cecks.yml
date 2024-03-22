@@ -1,4 +1,4 @@
-name: Ruff code checks and poetry checks
+name: Code quality checks
 on: push
 
 jobs:
