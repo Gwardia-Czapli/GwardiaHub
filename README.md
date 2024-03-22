@@ -30,7 +30,7 @@ We want to create website with Django, that will be useful to as many as three d
 3. Install [python-poetry](https://python-poetry.org/)
 4. In terminal go to repository folder (if we follow example from 2. it will be Documents/GwardiaHub) and enter `poetry install` 
 5. Install [pre-commit](https://pre-commit.com/)
-6. In terminal go to repository folder and enter and `pre-commit`
+6. In terminal go to repository folder and enter and `pre-commit install`
 7. Open IDE (preferably PyCharm) and with `Open folder` option open repository folder as project in your IDE
 
 ### Server running
