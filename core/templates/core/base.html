@@ -4,9 +4,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://cdn.tailwindcss.com"></script>
+        {% load static %}
+        <script src="{% static "tailwind_custom_styles.js" %}"></script>
         <title>GwardiaHub | {% block title %}{% endblock %}</title>
     </head>
-    <body>
+    <body class="bg-main_bg border-border_bg border-solid border-12 border-t-0 h-screen text-basic_text">
         <main>
             {% block content %}
             {% endblock %}
