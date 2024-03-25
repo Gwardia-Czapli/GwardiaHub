@@ -6,6 +6,7 @@
         <script src="https://cdn.tailwindcss.com"></script>
         {% load static %}
         <script src="{% static "tailwind_custom_styles.js" %}"></script>
+        <script src="https://unpkg.com/starback@2.1.1/dist/starback.global.js"></script>
         <title>GwardiaHub | {% block title %}{% endblock %}</title>
 
         <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
@@ -14,8 +15,30 @@
     </head>
     <body class="bg-main_bg">
         <main>
+            <canvas id="canvas" class="fixed -z-1"></canvas>
+            <div class="relative z-1">
             {% block content %}
             {% endblock %}
+            </div>
         </main>
+        <script>
+            const canvas = document.getElementById('canvas');
+            const starback = new Starback(canvas, {
+                type: 'dot',
+                quantity: 100,
+                height: 600,
+                width: 800,
+                backgroundColor: [],
+                randomOpacity: true,
+                // Add more options as needed
+            });
+            function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas(); // Set canvas size initially
+        </script>
     </body>
 </html>
