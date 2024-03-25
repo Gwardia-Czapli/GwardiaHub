@@ -8,4 +8,4 @@ class NextMeeting(models.Model):
     date_of_meeting = models.DateTimeField("Data spotkania")
 
     def __str__(self):
-        return self.title
+        return f"{self.title} - {self.description}"
