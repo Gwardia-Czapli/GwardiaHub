@@ -7,8 +7,12 @@
         {% load static %}
         <script src="{% static "tailwind_custom_styles.js" %}"></script>
         <title>GwardiaHub | {% block title %}{% endblock %}</title>
+
+        <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
     </head>
-    <body class="bg-main_bg border-border_bg border-solid border-12 border-t-0 h-screen text-basic_text">
+    <body class="bg-main_bg">
         <main>
             {% block content %}
             {% endblock %}
