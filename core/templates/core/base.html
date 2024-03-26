@@ -17,8 +17,8 @@
         <main>
             <canvas id="starback-bg" class="fixed -z-1"></canvas>
             <div class="relative z-1">
-            {% block content %}
-            {% endblock %}
+                {% block content %}
+                {% endblock %}
             </div>
         </main>
         <script>
@@ -32,8 +32,8 @@
                 randomOpacity: true,
             });
             function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
             }
 
             window.addEventListener('resize', resizeCanvas);
