@@ -24,21 +24,36 @@
 
 
 {% block content %}
+    <nav class="bg-white border-gray-200 dark:bg-gray-900">
+        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
+            <a href="https://github.com/Gwardia-Czapli/GwardiaHub" class="hover:text-blue-100 text-gray-400 transition-colors duration-300" target="_blank">
+                <i class="fa-brands fa-github fa-3x mr-5"></i>
+                <span class="text-4xl text-white font-bold my-5">GwardiaHub</span>
+            </a>
+        </div>
+    </nav>
+    <nav class="bg-gray-50 dark:bg-gray-700">
+        <div class="max-w-screen-xl px-4 py-3 mx-auto">
+            <div class="flex items-center">
+                <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
+                    <li>
+                        <a href="https://github.com/Gwardia-Czapli/GwardiaHub" class="text-gray-900 dark:text-white hover:underline" aria-current="page">Gwardia</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="flex items-center justify-center h-screen text-white">
     <canvas id="starback-bg" class="fixed -z-1"></canvas>
     <div class="z-1 relative flex items-center justify-center h-screen">
         <div class="text-center">
-            <h1 class="text-4xl text-white font-bold my-5">Gwardia Hub</h1>
             <span>Strona internetowa, która ma służyć pomocą szkolną oraz efektywnym zarządzaniem aktywnościami Gwardii.</span><br/>
             <span class="font-bold">W trakcie programowania!</span>
             <br><br>
             <div class="items-center">
-                <a href="https://github.com/Gwardia-Czapli/GwardiaHub" class="hover:text-blue-700 text-gray-400 transition-colors duration-300" target="_blank">
-                    <i class="fa-brands fa-github fa-3x mr-5"></i>
-                </a>
 {#                For now we don't have any Discord to link #}
-{#                <a href="https://example.com" class="hover:text-blue-500 text-gray-400 transition-colors duration-300" target="_blank">#}
-{#                    <i class="fa-brands fa-discord fa-3x"></i>#}
-{#                </a>#}
             </div>
         </div>
     </div>
