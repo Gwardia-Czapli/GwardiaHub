@@ -16,9 +16,9 @@ services:
         fromDatabase:
           name: gwardia_hub
           property: connectionString
-      - key: SECRET_KEY
-        generateValue: true
       - key: WEB_CONCURRENCY
         value: 4
       - key: POETRY_VERSION
         value: 1.8.2
+      - key: DEBUG
+        value: 0
