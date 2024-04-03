@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "core",
     "fontawesomefree",
+    "gwardia",
 ]
 
 MIDDLEWARE = [
@@ -81,9 +82,9 @@ WSGI_APPLICATION = "gwardia_hub.wsgi.application"
 
 DATABASES = {
     "default": dj_database_url.config(
-            default="postgresql://root:root@localhost:5432/gwardiahub",
-            conn_max_age=600
-        ),
+        default="postgresql://root:root@localhost:5432/gwardiahub",
+        conn_max_age=600
+    ),
 }
 
 # Password validation
@@ -119,9 +120,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [
-    BASE_DIR / "static/GwardiaHub/"
-]
+STATICFILES_DIRS = [BASE_DIR / "static/GwardiaHub/"]
 
 if not DEBUG:
     # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
