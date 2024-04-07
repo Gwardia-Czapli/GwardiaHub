@@ -1,0 +1,24 @@
+databases:
+  - name: gwardia_hub
+    plan: free
+    databaseName: gwardia_hub
+    user: root
+
+services:
+  - type: web
+    plan: free
+    name: gwardia_hub
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "python -m gunicorn gwardia_hub.asgi:application -k uvicorn.workers.UvicornWorker"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: gwardia_hub
+          property: connectionString
+      - key: WEB_CONCURRENCY
+        value: 4
+      - key: POETRY_VERSION
+        value: 1.8.2
+      - key: DJANGO_DEBUG
+        value: 0
