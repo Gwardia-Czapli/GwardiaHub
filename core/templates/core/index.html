@@ -4,8 +4,7 @@
 
 {% block content %}
     <canvas id="starback-bg" class="fixed -z-1"></canvas>
-
-    <div class="flex items-center justify-center h-screen">
+    <div class="z-1 relative flex items-center justify-center h-screen">
         <div class="text-center">
             <h1 class="text-4xl text-white font-bold my-5">Gwardia Hub</h1>
             <span>Strona internetowa, która ma służyć pomocą szkolną oraz efektywnym zarządzaniem aktywnościami Gwardii.</span><br/>
@@ -22,7 +21,6 @@
             </div>
         </div>
     </div>
-
     <script>
         const canvas = document.getElementById('starback-bg');
         const starback = new Starback(canvas, {
