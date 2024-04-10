@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+
 import dj_database_url
 import os
 
@@ -21,7 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-4j1$hggp9)@sf0^*#c!#^p#$$@@t%rvk1d*8u9epdbec1o=qb!")
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY", "django-insecure-4j1$hggp9)@sf0^*#c!#^p#$$@@t%rvk1d*8u9epdbec1o=qb!"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DJANGO_DEBUG", "") != "0"
@@ -82,8 +85,7 @@ WSGI_APPLICATION = "gwardia_hub.wsgi.application"
 
 DATABASES = {
     "default": dj_database_url.config(
-        default="postgresql://root:root@localhost:5432/gwardiahub",
-        conn_max_age=600
+        default="postgresql://root:root@localhost:5432/gwardiahub", conn_max_age=600
     ),
 }
 
