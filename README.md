@@ -32,8 +32,11 @@ We want to create website with Django, that will be useful to as many as three d
 5. Install [pre-commit](https://pre-commit.com/)
 6. In terminal go to repository folder and enter and `pre-commit install`
 7. Open IDE (preferably PyCharm) and with `Open folder` option open repository folder as project in your IDE
+8. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 ### Server running
 
 1. Open venv (if you use PyCharm just open terminal in GwardiaHub project)
-2. Enter `python manage.py runserver`
+2. Enter `docker compose up` (it may not work the first time, quit it with Ctrl+C and try again)
+3. Open new terminal in PyCharm
+4. Enter `python manage.py runserver`
