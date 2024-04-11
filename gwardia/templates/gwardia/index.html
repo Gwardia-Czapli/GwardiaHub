@@ -3,5 +3,40 @@
 {% block title %}Panel Gwardii{% endblock %}
 
 {% block content %}
-    <h1>Panel Gwardii! WIP!</h1>
+    <div class="flex flex-col items-center h-screen">
+        <h1 class="text-4xl text-white font-bold my-10 mt-16 mb-8">Panel Gwardii! WIP!</h1>
+        <p class="italic text-xs text-gray-500 mb-2">Click meeting to display its description</p>
+        <ul class="w-1/2" id="js-next-meetings-container">
+            {% for meeting in next_5_meetings %}
+                <li class="js-meeting-container flex flex-col items-center">
+                    <p class="border-solid border-gray-500 border-2 p-5 w-full mb-1 rounded-2xl flex justify-between">
+                        <span>{{ meeting.title }}</span><span>{{ meeting.date_of_meeting }}</span>
+                    </p>
+                    <p class="js-meeting-description border-solid border-gray-500 border-2 p-5 w-3/4 mb-1 rounded-2xl hidden">{{ meeting.description }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <script>
+        nextMeetingsContainer = document.getElementById('js-next-meetings-container')
+        nextMeetingsContainer.addEventListener('click', (event) => displayDescription(event.target))
+        function displayDescription(element){
+            element = element.closest('.js-meeting-container')
+            const meetingDescription = element.lastElementChild
+            document.querySelectorAll('.js-meeting-description').forEach((descriptionElement) => {
+                if (descriptionElement === meetingDescription) {
+                    return 0
+                }
+                if (!descriptionElement.classList.contains('hidden')) {
+                    descriptionElement.classList.add('hidden')
+                }
+            })
+            if (meetingDescription.classList.contains('hidden')) {
+                meetingDescription.classList.remove('hidden')
+            }
+            else {
+                meetingDescription.classList.add('hidden')
+            }
+        }
+    </script>
 {% endblock %}
