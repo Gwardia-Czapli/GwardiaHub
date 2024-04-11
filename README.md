@@ -34,11 +34,10 @@ We want to create website with Django, that will be useful to as many as three d
 7. Open IDE (preferably PyCharm) and with `Open folder` option open repository folder as project in your IDE
 8. Install Docker and Docker Compose
 
-
 ### Server running
 
 1. If you installed Docker Desktop open it
-2. Open terminal on repo folder 
+2. Open terminal in repo folder 
 3. Enter `docker compose up` 
-4. Open new terminal 
+4. Open new terminal window
 5. Enter `python manage.py runserver`
