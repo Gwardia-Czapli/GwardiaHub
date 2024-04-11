@@ -3,40 +3,35 @@
 {% block title %}Panel Gwardii{% endblock %}
 
 {% block content %}
-    <div class="flex flex-col items-center h-screen">
-        <h1 class="text-4xl text-white font-bold my-10 mt-16 mb-8">Panel Gwardii! WIP!</h1>
-        <p class="italic text-xs text-gray-500 mb-2">Click meeting to display its description</p>
+    <div class="flex flex-col items-center">
+        <h1 class="text-4xl text-white font-bold mt-16 mb-8">Panel Gwardii! WIP!</h1>
+        <p class="italic text-xs text-gray-500 mb-2">Kliknij w dane spotkanie, by wyświetlić jego opis</p>
         <ul class="w-1/2" id="js-next-meetings-container">
-            {% for meeting in next_5_meetings %}
-                <li class="js-meeting-container flex flex-col items-center">
-                    <p class="border-solid border-gray-500 border-2 p-5 w-full mb-1 rounded-2xl flex justify-between">
-                        <span>{{ meeting.title }}</span><span>{{ meeting.date_of_meeting }}</span>
+            {% for meeting in upcoming_five_meetings %}
+                <li class="js-meeting-container flex flex-col items-center border-solid border-gray-500 border-2 p-5 w-full mb-1 rounded-2xl cursor-pointer">
+                    <p class="w-full">
+                        <span class="break-all">{{ meeting.title }}</span><span class="float-right">{{ meeting.date_of_meeting }}</span>
                     </p>
-                    <p class="js-meeting-description border-solid border-gray-500 border-2 p-5 w-3/4 mb-1 rounded-2xl hidden">{{ meeting.description }}</p>
+                    <p class="js-meeting-description border-gray-500 p-5 w-full mb-1 break-all border-t-2 hidden">{{ meeting.description }}</p>
                 </li>
             {% endfor %}
         </ul>
     </div>
     <script>
-        nextMeetingsContainer = document.getElementById('js-next-meetings-container')
-        nextMeetingsContainer.addEventListener('click', (event) => displayDescription(event.target))
-        function displayDescription(element){
-            element = element.closest('.js-meeting-container')
-            const meetingDescription = element.lastElementChild
+        nextMeetingsContainer = document.getElementById('js-next-meetings-container');
+        nextMeetingsContainer.addEventListener('click', (event) => displayDescription(event.target));
+        function displayDescription(clickedElement) {
+            clickedElement = clickedElement.closest('.js-meeting-container')
+            const meetingDescription = clickedElement.lastElementChild;
             document.querySelectorAll('.js-meeting-description').forEach((descriptionElement) => {
                 if (descriptionElement === meetingDescription) {
-                    return 0
+                    return 0;
                 }
                 if (!descriptionElement.classList.contains('hidden')) {
-                    descriptionElement.classList.add('hidden')
+                    descriptionElement.classList.add('hidden');
                 }
             })
-            if (meetingDescription.classList.contains('hidden')) {
-                meetingDescription.classList.remove('hidden')
-            }
-            else {
-                meetingDescription.classList.add('hidden')
-            }
+            meetingDescription.classList.toggle('hidden');
         }
     </script>
 {% endblock %}
