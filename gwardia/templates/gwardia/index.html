@@ -10,9 +10,12 @@
             {% for meeting in upcoming_five_meetings %}
                 <li class="js-meeting-container flex flex-col items-center border-solid border-gray-500 border-2 p-5 w-full mb-1 rounded-2xl cursor-pointer">
                     <p class="w-full">
-                        <span class="break-all">{{ meeting.title }}</span><span class="float-right">{{ meeting.date_of_meeting }}</span>
+                        <span class="break-all">{{ meeting.title }}</span>
+                        <span class="float-right">{{ meeting.date_of_meeting }}</span>
                     </p>
-                    <p class="js-meeting-description border-gray-500 p-5 w-full mb-1 break-all border-t-2 hidden">{{ meeting.description }}</p>
+                    <p class="js-meeting-description border-gray-500 p-5 w-full break-all border-t-2 hidden">
+                        {{ meeting.description|linebreaks }}
+                    </p>
                 </li>
             {% endfor %}
         </ul>
@@ -25,7 +28,7 @@
             const meetingDescription = clickedElement.lastElementChild;
             document.querySelectorAll('.js-meeting-description').forEach((descriptionElement) => {
                 if (descriptionElement === meetingDescription) {
-                    return 0;
+                    return;
                 }
                 if (!descriptionElement.classList.contains('hidden')) {
                     descriptionElement.classList.add('hidden');
