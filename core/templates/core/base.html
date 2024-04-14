@@ -1,5 +1,6 @@
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,10 +14,12 @@
         <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
     </head>
-    <body class="bg-main_bg text-white">
+    <body class="bg-black text-white">
         <main>
-            {% block content %}
-            {% endblock %}
+            {% language 'pl-pl' %}
+                {% block content %}
+                {% endblock %}
+            {% endlanguage %}
         </main>
     </body>
 </html>
