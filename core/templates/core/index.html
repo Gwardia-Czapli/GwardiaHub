@@ -2,6 +2,27 @@
 
 {% block title %}Strona Główna{% endblock %}
 
+{% block head %}
+<script>
+    const canvas = document.getElementById('starback-bg');
+    const starback = new Starback(canvas, {
+        type: 'dot',
+        quantity: 250,
+        height: window.innerHeight,
+        width: window.innerWidth,
+        backgroundColor: [],
+        randomOpacity: true,
+    });
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+</script>
+{% endblock head %}
+
+
 {% block content %}
     <canvas id="starback-bg" class="fixed -z-1"></canvas>
     <div class="z-1 relative flex items-center justify-center h-screen">
@@ -21,21 +42,5 @@
             </div>
         </div>
     </div>
-    <script>
-        const canvas = document.getElementById('starback-bg');
-        const starback = new Starback(canvas, {
-            type: 'dot',
-            quantity: 250,
-            height: window.innerHeight,
-            width: window.innerWidth,
-            backgroundColor: [],
-            randomOpacity: true,
-        });
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
 
-        window.addEventListener('resize', resizeCanvas);
-    </script>
 {% endblock %}
