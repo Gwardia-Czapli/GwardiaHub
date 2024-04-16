@@ -17,6 +17,7 @@ dj-database-url = "^2.1.0"
 whitenoise = {extras = ["brotil"], version = "^6.6.0"}
 gunicorn = "^21.2.0"
 uvicorn = "^0.29.0"
+django-environ = "^0.11.2"
 
 [tool.poetry.dev-dependencies]
 ruff = "^0.3.3"
