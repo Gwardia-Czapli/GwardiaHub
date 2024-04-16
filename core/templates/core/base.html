@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        {% block head %}
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>GwardiaHub | {% block title %}{% endblock %}</title>
@@ -13,7 +12,8 @@
         <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
-        {% endblock head %}
+        {% block head %}
+        {% endblock %}
     </head>
     <body class="bg-main_bg text-white">
         <main>
