@@ -10,17 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-import os
-
 from pathlib import Path
 
-import dj_database_url
 import environ
 from django.core.management.utils import get_random_secret_key
 
-env = environ.Env(
-    DEBUG=(bool, False),
-)
+env = environ.Env(DEBUG=(bool, True), FLY_APP_NAME=str, SECRET_KEY=str)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,14 +27,19 @@ environ.Env.read_env(BASE_DIR / ".env")
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.str("SECRET_KEY", default=get_random_secret_key())
+SECRET_KEY = env("SECRET_KEY", default=get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env("DEBUG", default=True)
+DEBUG = env("DEBUG")
 
-APP_NAME = os.environ.get("FLY_APP_NAME")
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", f"{APP_NAME}.fly.dev"]
-CSRF_TRUSTED_ORIGINS = [f"https://{APP_NAME}.fly.dev"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0"]
+CSRF_TRUSTED_ORIGINS = []
+
+app_name = env("FLY_APP_NAME", default=None)
+if app_name:
+    APP_NAME = app_name
+    ALLOWED_HOSTS.append(f"{APP_NAME}.fly.dev")
+    CSRF_TRUSTED_ORIGINS.append(f"https://{APP_NAME}.fly.dev")
 
 # Application definition
 
@@ -58,13 +58,13 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "gwardia_hub.urls"
@@ -91,9 +91,7 @@ WSGI_APPLICATION = "gwardia_hub.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": dj_database_url.config(
-        default="postgresql://root:root@localhost:5432/gwardiahub", conn_max_age=600
-    ),
+    "default": env.db_url(default="postgresql://root:root@localhost:5432/gwardiahub"),
 }
 
 # Password validation
@@ -129,7 +127,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "static"
+STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
