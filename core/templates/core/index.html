@@ -24,29 +24,47 @@
 
 
 {% block content %}
-    <nav class="flex flex-wrap justify-between items-center mx-auto w-screen p-4 bg-gray-400 border-gray-800 bg-gray-900">
-            <a href="https://github.com/Gwardia-Czapli/GwardiaHub" class="hover:text-blue-100 text-gray-400 transition-colors duration-300" target="_blank">
+<div class="h-screen w-screen">
+    <nav class="flex flex-wrap justify-between items-center mx-auto w-screen p-2 border-gray-800 bg-gray-900">
+            <a href="https://github.com/Gwardia-Czapli/GwardiaHub" class="flex items-center hover:text-blue-100 text-gray-400 transition-colors duration-300 ml-5" target="_blank">
                 <i class="fa-brands fa-github fa-3x mr-5"></i>
-                <span class="text-4xl text-grey-400 font-bold my-5">GwardiaHub</span>
-            </a>
-    </nav>
-    <nav class="w-screen px-4 py-3 mx-auto bg-gray-50 bg-gray-800">
-            <div class="flex items-center">
-                <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
+                <span class="text-4xl text-gray-400 font-bold my-5">GwardiaHub</span>
+                <ul>
                     <li>
-                        <a href="https://github.com/Gwardia-Czapli/GwardiaHub" class="text-gray-400 hover:underline" aria-current="page">Gwardia</a>
+                        <a href="{% url 'gwardia:index' %}" class="mr-5 text-gray-400 hover:underline" aria-current="page">Gwardia</a>
                     </li>
                 </ul>
-            </div>
+            </a>
     </nav>
+
 
 
     <div class="flex items-center justify-center h-screen text-white">
     <canvas id="starback-bg" class="fixed -z-1"></canvas>
+
+    <div class="z-1 relative flex items-center justify-center h-5/6">
+
     <div class="z-1 relative flex items-center justify-center h-screen">
         <div class="text-center">
             <span>Strona internetowa, która ma służyć pomocą szkolną oraz efektywnym zarządzaniem aktywnościami Gwardii.</span><br/>
             <span class="font-bold">W trakcie programowania!</span>
+        </div>
+    </div>
+</div>
+    <script>
+        const canvas = document.getElementById('starback-bg');
+        const starback = new Starback(canvas, {
+            type: 'dot',
+            quantity: 250,
+            height: window.innerHeight,
+            width: window.innerWidth,
+            backgroundColor: [],
+            randomOpacity: true,
+        });
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
             <br><br>
             <div class="items-center">
 {#                For now we don't have any Discord to link #}
