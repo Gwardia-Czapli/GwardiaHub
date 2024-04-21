@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from .models import NextMeeting
+from .models import Meeting
 
-admin.site.register(NextMeeting)
+admin.site.register(Meeting)
