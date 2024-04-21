@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class NextMeeting(models.Model):
+class Meeting(models.Model):
     title = models.CharField(max_length=150)
     description = models.TextField()
     date_of_meeting = models.DateTimeField("Date of meeting")
