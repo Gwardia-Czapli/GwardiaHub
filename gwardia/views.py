@@ -5,6 +5,14 @@ from .models import Meeting
 
 
 def index(request):
-    upcoming_meetings = Meeting.objects.filter(date_of_meeting__gte=timezone.now()).order_by("date_of_meeting")
-    context = {"upcoming_five_meetings": upcoming_meetings[:5]}
+    upcoming_meetings = Meeting.objects.filter(date__gte=timezone.now()).order_by(
+        "-date"
+    )
+    archival_meetings = Meeting.objects.filter(date__lt=timezone.now()).order_by(
+        "-date"
+    )
+    context = {
+        "upcoming_meetings": upcoming_meetings,
+        "archival_meetings": archival_meetings,
+    }
     return render(request, "gwardia/index.html", context)

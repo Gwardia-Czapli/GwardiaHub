@@ -4,7 +4,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('gwardia', '0002_alter_nextmeeting_date_of_meeting'),
     ]

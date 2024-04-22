@@ -2,27 +2,30 @@
 
 {% block title %}Panel Gwardii{% endblock %}
 
+{% load list_events %}
+
 {% block content %}
     <div class="flex flex-col items-center">
         <h1 class="text-4xl text-white font-bold mt-16 mb-8">Panel Gwardii! WIP!</h1>
         <p class="italic text-xs text-gray-500 mb-2">Kliknij w dane spotkanie, by wyświetlić jego opis</p>
-        <ul class="w-1/2" id="js-next-meetings-container">
-            {% for meeting in upcoming_five_meetings %}
-                <li class="js-meeting-container flex flex-col items-center border-solid border-gray-500 border-2 p-5 w-full mb-1 rounded-2xl cursor-pointer">
-                    <p class="w-full">
-                        <span class="break-all">{{ meeting.title }}</span>
-                        <span class="float-right">{{ meeting.date_of_meeting }}</span>
-                    </p>
-                    <p class="js-meeting-description border-gray-500 p-5 w-full break-all border-t-2 hidden">
-                        {{ meeting.description|linebreaksbr }}
-                    </p>
-                </li>
-            {% endfor %}
-        </ul>
+        <div  class="w-3/4" id="js-next-meetings-container">
+            {% list_events upcoming_meetings "Nadchodzące" %}
+        </div>
+        <div class="w-3/4 hidden" id="js-archival-meetings-container">
+            {% list_events archival_meetings "Archiwalne" %}
+        </div>
+        <button class="text-bold border-2 border-solid p-2 rounded-lg mt-8 border-gray-500" id="js-archival-meetings-toggle-button">
+            Pokaż spotkania archiwalne
+        </button>
     </div>
     <script>
-        nextMeetingsContainer = document.getElementById('js-next-meetings-container');
+        const nextMeetingsContainer = document.getElementById('js-next-meetings-container').lastElementChild;
         nextMeetingsContainer.addEventListener('click', (event) => displayDescription(event.target));
+        const archivalMeetingsContainer = document.getElementById('js-archival-meetings-container');
+        archivalMeetingsContainer.addEventListener('click', (event) => displayDescription(event.target));
+        const archivalMeetingsToggleButton = document.getElementById('js-archival-meetings-toggle-button');
+        archivalMeetingsToggleButton.addEventListener('click', displayArchivalMeetings);
+
         function displayDescription(clickedElement) {
             clickedElement = clickedElement.closest('.js-meeting-container')
             const meetingDescription = clickedElement.lastElementChild;
@@ -35,6 +38,14 @@
                 }
             })
             meetingDescription.classList.toggle('hidden');
+        }
+        function displayArchivalMeetings() {
+            archivalMeetingsContainer.classList.toggle('hidden');
+            if (archivalMeetingsContainer.classList.contains('hidden')) {
+                archivalMeetingsToggleButton.innerText = 'Pokaż spotkania archiwalne';
+            } else {
+                archivalMeetingsToggleButton.innerText = 'Ukryj spotkania archiwalne';
+            }
         }
     </script>
 {% endblock %}

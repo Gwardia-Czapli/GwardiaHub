@@ -1,0 +1,23 @@
+<h2 class="text-2xl text-white text-center font-bold mt-8 mb-4">{{ title }} spotkania</h2>
+<ul>
+    {% if events %}
+        {% for event in events %}
+            <li class="js-meeting-container flex flex-col items-center border-solid border-gray-500 border-2 p-5 w-full mb-1 rounded-2xl cursor-pointer {% if event.is_archival %}bg-orange-500 bg-opacity-25{% endif %}">
+                {% if event.is_archival %}
+                    <p class="text-orange-300 text-right w-full ">Archiwalne</p>
+                {% endif %}
+                <p class="w-full">
+                    <span class="break-words font-bold">{{ event.title }}</span>
+                    <span class="float-right">{{ event.date }}</span>
+                </p>
+                <p class="js-meeting-description border-gray-500 pt-5 w-full break-words border-t-2 hidden">
+                    {{ event.description|linebreaksbr }}
+                </p>
+            </li>
+        {% endfor %}
+    {% else %}
+        <li class="flex flex-col items-center border-solid border-gray-500 border-2 w-full mb-1 rounded-2xl text-center">
+            Brak spotkań!
+        </li>
+    {% endif %}
+</ul>
