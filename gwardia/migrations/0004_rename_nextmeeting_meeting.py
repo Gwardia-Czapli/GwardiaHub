@@ -5,12 +5,12 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('gwardia', '0002_alter_nextmeeting_date_of_meeting'),
+        ("gwardia", "0003_rename_date_of_meeting_meeting_date"),
     ]
 
     operations = [
         migrations.RenameModel(
-            old_name='NextMeeting',
-            new_name='Meeting',
+            old_name="NextMeeting",
+            new_name="Meeting",
         ),
     ]
