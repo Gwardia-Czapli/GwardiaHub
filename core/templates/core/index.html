@@ -23,24 +23,10 @@
 {% endblock %}
 
 {% block content %}
-<div class="h-screen w-screen">
-    <nav class="flex flex-wrap justify-between items-center w-screen p-2 bg-black border-b-2 border-white">
-        <a href="https://github.com/Gwardia-Czapli/GwardiaHub" class="flex items-center text-gray-300 transition-colors duration-300 ml-5 hover:text-blue-100" target="_blank">
-            <i class="fa-brands fa-github fa-3x mr-5"></i>
-            <span class="text-2xl text-gray-300 font-bold my-4">GwardiaHub</span>
-            <ul>
-                <li>
-                    <a href="{% url 'gwardia:index' %}" class="mr-5 text-gray-300 hover:underline" aria-current="page">Gwardia</a>
-                </li>
-            </ul>
-        </a>
-    </nav>
-
     <canvas id="starback-bg" class="fixed -z-1"></canvas>
 
     <div class="z-1 relative flex flex-col items-center justify-center h-5/6 text-center">
         <span>Strona internetowa, która ma służyć pomocą szkolną oraz efektywnym zarządzaniem aktywnościami Gwardii.</span>
         <span class="font-bold">W trakcie programowania!</span>
     </div>
-</div>
 {% endblock %}
