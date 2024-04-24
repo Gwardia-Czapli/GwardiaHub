@@ -19,11 +19,10 @@ We want to create website with Django, that will be useful to as many as three d
   - place to submit feedback about meetings,
   - assignments given on meetings.
 - For Genshin Impact players:
-  - Few ideas to enhance the game:
   - wish simulator(and list of the characters you've collected already)
   - future banners info (duration, characters)
   - events info (duration, title of the event, description, rewards)
-  - a table containing incoming daily hoyolabs in/pop-up notification about next daily hoyolabs in
+  - a table containing incoming daily Hoyolab check-ins or pop-up notification about it
   - expanded ui design (later when the common one is finished, genshin inspired)
 
 ## 🛠️ Installation guide for contributors
