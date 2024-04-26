@@ -6,6 +6,9 @@ tailwind.config = {
           borderWidth: {
             '12': '12px',
           },
+          width: {
+              "1/8": "12.5%",
+          }
         },
       },
 }
