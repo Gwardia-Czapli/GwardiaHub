@@ -11,6 +11,7 @@ SIDEBAR_LINKS = {
             "name": "Prezentacje",
             "url": "https://drive.google.com/drive/folders/13xlbrwUslL-as5f41sypAq84mszobigY?usp=sharing",
             "icon": "file-powerpoint",
+            "new_tab": True,
         },
     ],
     "Klasowe": [

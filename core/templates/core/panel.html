@@ -13,7 +13,7 @@
             <div class="flex flex-grow flex-col divide-y divide-y-reverse divide-gray-600">
                 <h3 class="mx-4 py-3 my-2 h-12 max-w-full text-lg font-bold">{{ namespace }}</h3>
                 {% for link in links %}
-                <a class="mx-4 py-3 my-2 h-12 max-w-full rounded-xl hover:bg-slate-600 text-lg" href="{{ link.url }}">
+                <a class="mx-4 py-3 my-2 h-12 max-w-full rounded-xl hover:bg-slate-600 text-lg" href="{{ link.url }}" {% if link.new_tab %} target="_blank" {% endif %}>
                     <i class="fa-regular fa-{{ link.icon }} mx-5 text-xl"></i><span>{{ link.name }}</span>
                 </a>
                 {% endfor %}
