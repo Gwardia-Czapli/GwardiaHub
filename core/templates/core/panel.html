@@ -5,19 +5,15 @@
 {% load list_events %}
 
 {% block content %}
-    <div class="absolute flex items-center md:hidden h-fit">
-        <button id="mobile-menu-btn" type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700">
-            <i class="fa-solid fa-bars block h-6 w-6"></i>
-        </button>
-    </div>
-    <div class="flex flex-row nowrap flex-grow max-h-full overflow-auto">
-        <div id="sidebar" class="hidden fixed md:relative md:block min-w-72 max-w-72 h-full bg-gray-800 shadow-2xl overflow-auto">
-        <div class="flex flex-col gap-y-5 pb-36 md:pb-0" id="sidebar-content">
+    <div class="flex flex-row nowrap flex-grow h-full overflow-auto">
+        <div id="sidebar" class="hidden fixed top-0 md:relative md:block min-w-72 max-w-72 h-full bg-gray-800 shadow-2xl overflow-auto z-[0]">
+        <div class="flex flex-col gap-y-3 pb-28 md:pb-0" id="sidebar-content">
+            <a href="/" class="mx-4 py-3 my-2 h-12 max-w-full text-lg font-bold">Strona Główna</a>
             {% for namespace, links in sidebar_links.items %}
-            <div class="flex flex-grow flex-col justify-start divide-y divide-gray-600">
-                <h3 class="flex mx-4 py-3 my-2 h-12 max-w-full items-center justify-start text-lg font-bold">{{ namespace }}</h3>
+            <div class="flex flex-grow flex-col divide-y divide-y-reverse divide-gray-600">
+                <h3 class="mx-4 py-3 my-2 h-12 max-w-full text-lg font-bold">{{ namespace }}</h3>
                 {% for link in links %}
-                <a class="flex mx-4 py-3 my-2 h-12 max-w-full rounded-xl hover:bg-slate-600 items-center text-lg" href="{{ link.url }}">
+                <a class="mx-4 py-3 my-2 h-12 max-w-full rounded-xl hover:bg-slate-600 text-lg" href="{{ link.url }}">
                     <i class="fa-regular fa-{{ link.icon }} mx-5 text-xl"></i><span>{{ link.name }}</span>
                 </a>
                 {% endfor %}
@@ -30,8 +26,16 @@
     </div>
     
     <script>
-        document.querySelector("#mobile-menu-btn").addEventListener('click', () => {
-            const menuElement = document.querySelector("#sidebar")
+        const menuElement = document.querySelector("#sidebar")
+        menuElement.addEventListener("click", (event) => {
+            event.stopPropagation()
+        })
+        document.addEventListener('click', () => {
+            menuElement.classList.add("hidden")
+        })
+        document.querySelector("#mobile-menu-btn").addEventListener('click', (event) => {
+            event.stopPropagation()
+            menuElement.focus()
             if (menuElement.classList.contains("hidden")) {
                 menuElement.classList.remove("hidden")
             } else {
@@ -39,4 +43,13 @@
             }
         })
     </script>
+{% endblock %}
+
+{% block navbar_links %}
+    <li class="md:hidden">
+        <button id="mobile-menu-btn" type="button" class="inline-flex items-center justify-evenly p-2 mr-3 text-gray-300 focus:no-underline">
+            <span>Pasek boczny</span>
+            <i class="fa-solid fa-bars block ml-2"></i>
+        </button>
+    </li>
 {% endblock %}

@@ -5,38 +5,18 @@ from .models import Meeting
 
 SIDEBAR_LINKS = {
     "Gwardia": [
-        {
-            "name": "Spotkania",
-            "url": "/gwardia",
-            "icon": "calendar-days",
-        },
-        {
-            "name": "Ankiety",
-            "url": "#",
-            "icon": "square-poll-horizontal",
-        },
+        {"name": "Spotkania", "url": "/gwardia", "icon": "calendar-days"},
+        {"name": "Ankiety", "url": "#", "icon": "square-poll-horizontal"},
         {
             "name": "Prezentacje",
-            "url": "#",
+            "url": "https://drive.google.com/drive/folders/13xlbrwUslL-as5f41sypAq84mszobigY?usp=sharing",
             "icon": "file-powerpoint",
         },
     ],
     "Klasowe": [
-        {
-            "name": "Obiady",
-            "url": "#",
-            "icon": "bowl-food",
-        },
-        {
-            "name": "Sprawdziany",
-            "url": "#",
-            "icon": "newspaper",
-        },
-        {
-            "name": "Zadania",
-            "url": "#",
-            "icon": "paste",
-        },
+        {"name": "Obiady", "url": "#", "icon": "bowl-food"},
+        {"name": "Sprawdziany", "url": "#", "icon": "newspaper"},
+        {"name": "Zadania", "url": "#", "icon": "paste"},
     ],
 }
 

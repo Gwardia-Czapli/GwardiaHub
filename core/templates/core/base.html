@@ -23,19 +23,17 @@
     </head>
     <body class="bg-gray-900 text-white">
         <main class="flex h-screen w-screen max-w-[100vw] max-h-[100vh] flex-col">
-            <nav class="flex flex-wrap justify-between items-center w-full p-2 bg-black border-b-2 border-white">
-                <a href="https://github.com/Gwardia-Czapli/GwardiaHub" class="flex items-center text-gray-300 transition-colors duration-300 ml-5 hover:text-blue-100" target="_blank">
-                    <i class="fa-brands fa-github fa-3x mr-5"></i>
-                    <span class="text-2xl text-gray-300 font-bold my-4">GwardiaHub</span>
-                </a>
-                <div class="inline-block my-2 mx-4">
+            <nav class="flex flex-nowrap justify-between items-center w-full p-2 bg-black border-b-2 border-white overflow-x-auto">
+                <div class="flex flex-nowrap">
+                    <a href="https://github.com/Gwardia-Czapli/GwardiaHub" class="flex items-center text-gray-300 transition-colors duration-300 ml-2 md:ml-5 hover:text-blue-100" target="_blank">
+                        <i class="fa-brands fa-github fa-3x mr-5"></i>
+                    </a>
+                    <a href="/" class="text-md md:text-2xl text-gray-300 font-bold my-4">GwardiaHub</a>
+                </div>
+                <div class="inline-block my-2 mx-2">
                     <ul class="flex justify-between items-center">
-                        <li>
-                            <a href="{% url 'core:index' %}" class="mr-5 text-gray-300 hover:underline" aria-current="page">Strona główna</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'gwardia:index' %}" class="mr-5 text-gray-300 hover:underline" aria-current="page">Gwardia</a>
-                        </li>
+                        {% block navbar_links %}
+                        {% endblock %}
                         <li>
                             <a href="{% url 'core:profile' %}">
                                 <img class="rounded-full w-8"
