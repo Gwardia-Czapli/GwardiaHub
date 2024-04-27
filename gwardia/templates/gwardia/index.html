@@ -7,9 +7,9 @@
 {% block panel_content %}
     <div id="gwardia-main-content" class="w-full overflow-auto">
         <div class="flex flex-col items-center">
-            <h1 class="text-4xl text-white font-bold mt-10 mb-8">Spotkania gwardii</h1>
+            <h1 class="text-4xl font-bold mt-10 mb-8">Spotkania gwardii</h1>
             <p class="italic text-xs text-gray-500 mb-2">Kliknij w dane spotkanie, by wyświetlić jego opis</p>
-            <div  class="w-3/4" id="js-next-meetings-container">
+            <div class="w-3/4" id="js-next-meetings-container">
                 {% list_events upcoming_meetings "Nadchodzące" %}
             </div>
             <div class="w-3/4 hidden" id="js-archival-meetings-container">

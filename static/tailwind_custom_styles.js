@@ -1,20 +1,25 @@
 // Used for custom styles in templates
 
 tailwind.config = {
-    theme: {
+      theme: {
         extend: {
-            borderWidth: {
-                '12': '12px',
+          borderWidth: {
+            '12': '12px',
+          },
+          keyframes: {
+            slideIn: {
+              '0%': { transform: 'translateX(-100%)' },
+              '100%': { transform: 'translateX(0)' },
             },
-            keyframes: {
-                levelBarSlideIn: {
-                    from: { width: '0' },
-                    to: { width: '100%' },
-                }
-            },
-            animation: {
-                levelBarSlideIn: 'levelBarSlideIn 0.9s ease-in-out'
-            },
+            levelBarSlideIn: {
+                from: { width: '0' },
+                to: { width: '100%' },
+            }
+          },
+          animation: {
+            slideIn: 'slideIn 0.3s ease-in-out',
+            levelBarSlideIn: 'levelBarSlideIn 0.9s ease-in-out'
+          },
         },
       },
 }
