@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Logowanie{% endblock %}
+
+{% block content %}
+<script type="module">
+    const canvas = document.getElementById('starback-bg');
+    const starback = new Starback(canvas, {
+        type: 'dot',
+        quantity: 250,
+        height: window.innerHeight,
+        width: window.innerWidth,
+        backgroundColor: [],
+        randomOpacity: true,
+    });
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+</script>
+<canvas id="starback-bg" class="fixed -z-1" width="871" height="911"></canvas>
+<div class="flex justify-center grid justify-items-center bg-transparent place-content-center">
+    <div class="h-screen w-screen relative flex flex-col items-center justify-center text-center">
+        {% load static %}
+        <div class="h-24 w-96">
+            <a href="https://discord.com/">
+                <img src="{% static 'discord-logo-blue.svg' %}"/>
+            </a>
+        </div>
+        <div class="rounded-lg h-14 bg-gradient-to-r from-[#5865F2] via-purple-500 to-pink-500 h-3/5 w-1/4 grid justify-items-center">
+            <img src="{% static 'Uwu2.png' %}" class="border-0 mt-14 p-0"/>
+            <button class="place-content-center hover:scale-110 ease-in-out duration-700 border-4 font-sans text-lg rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 h-14 mt-0 w-3/4 grid justify-items-center ">Zaloguj się za pomocą konta Discord</button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
