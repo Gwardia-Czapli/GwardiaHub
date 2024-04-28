@@ -23,7 +23,7 @@
                 <p>Doświadczenie: {{ user.exp }}</p>
             </div>
             <div class="border-2 border-gray-600 rounded-2xl h-[3svh] overflow-hidden">
-                <div class="bg-fixed bg-gradient-to-r from-[#663dff] from-[0%] via-[#aa00ff] via-[37%] to-[#cc4499] to-[100%] h-full rounded-s-2xl w-[{{ user.exp|calculate_percentage:user.max_exp }}%]"></div>
+                <div class="bg-fixed bg-gradient-to-r from-[#663dff] from-[0%] via-[#aa00ff] via-[37%] to-[#cc4499] to-[100%] h-full rounded-s-2xl w-[{{ user.exp|calculate_percentage:user.max_exp }}%] animate-levelBarSlideIn "></div>
             </div>
             {# those max values are just placeholders, we will set it while adding lvl handling #}
         </div>
