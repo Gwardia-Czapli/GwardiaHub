@@ -11,8 +11,8 @@ tailwind.config = {
             },
             keyframes: {
                 levelBarSlideIn: {
-                    '0%': { transform: 'translateX(-100%)' },
-                    '100%': { transform: 'translateX(0)' },
+                    from: { width: '0' },
+                    to: { width: '100%' },
                 }
             },
             animation: {
