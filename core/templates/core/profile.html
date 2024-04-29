@@ -1,4 +1,6 @@
 {% extends 'core/base.html' %}
+
+{% load static %}
 {% load core_extras %}
 
 {% block title %}{{ user.name }}{% endblock %}
@@ -6,7 +8,7 @@
 {% block content %}
     <div class="mt-32 w-screen flex flex-col items-center justify-center">
         <div class="flex gap-5 w-1/2 pb-4 border-b-2">
-            <img src="{{ user.avatar }}" alt="avatar" class="h-auto w-1/8 rounded-full">
+            <img src="{% if user.avatar %}{{ user.avatar }}{% else %}{% static "placeholder_pfp.png" %}{% endif %}" alt="avatar" class="h-auto w-1/8 rounded-full">
             <div class="flex flex-col">
                 <h1 class="text-4xl text-bold">{{ user.name }}</h1>
                 <div class="flex gap-4 text-gray-500 flex-wrap">
@@ -24,7 +26,7 @@
             </div>
             <div class="border-2 border-gray-600 rounded-2xl h-[3svh] overflow-hidden w-full">
                 <div class="h-full  w-[{{ user.exp|calculate_percentage:user.max_exp }}%]">
-                    <div class="bg-fixed bg-gradient-to-r from-[#663dff] from-[0%] via-[#aa00ff] via-[37%] to-[#cc4499] to-[100%] rounded-s-2xl h-full w-full animate-levelBarSlideIn"></div>
+                    <div class="bg-fixed bg-gradient-to-r from-[#663dff] from-[0%] via-[#aa00ff] via-[37%] to-[#cc4499] rounded-s-2xl h-full w-full animate-levelBarSlideIn"></div>
                 </div>
             </div>
         </div>
