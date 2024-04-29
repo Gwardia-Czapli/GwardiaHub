@@ -6,9 +6,6 @@ tailwind.config = {
             borderWidth: {
                 '12': '12px',
             },
-            width: {
-                "1/8": "12.5%",
-            },
             keyframes: {
                 levelBarSlideIn: {
                     from: { width: '0' },
