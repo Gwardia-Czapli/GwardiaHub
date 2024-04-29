@@ -12,9 +12,9 @@ tailwind.config = {
                 to: { width: '100%' },
             }
           },
-          animation: {
-            levelBarSlideIn: 'levelBarSlideIn 0.9s ease-in-out'
-          },
+            animation: {
+                levelBarSlideIn: 'levelBarSlideIn 0.9s ease-in-out'
+            },
         },
       },
 }

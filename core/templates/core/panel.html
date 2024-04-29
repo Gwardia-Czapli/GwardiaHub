@@ -5,19 +5,23 @@
 {% load list_events %}
 
 {% block content %}
-    <div class="flex flex-row nowrap flex-grow h-full overflow-auto">
-        <div id="sidebar" class="flex md:flex flex-col gap-y-3 fixed md:relative top-0 left-[-18rem] md:left-0 md:translate-x-0 min-w-72 max-w-72 h-full bg-gray-800 shadow-2xl overflow-auto duration-300 md:duration-0 border-r border-gray-600">
+    <div class="fixed bg-gray-900 opacity-70 h-full w-full hidden" id="dark-overlay"></div>
+    <div class="flex flex-row h-full overflow-auto">
+        <div id="sidebar" class="flex flex-col gap-y-3 fixed md:relative top-0 -translate-x-72 md:translate-x-0
+            duration-300 min-w-72 w-72 h-full bg-gray-800 overflow-auto border-r border-gray-600">
             <a href="/" class="mx-4 pt-4 text-lg font-bold hover:underline">Strona Główna</a>
             {% for namespace, links in sidebar_links.items %}
-                <div class="flex flex-col divide-y divide-y-reverse divide-gray-600">
-                    <h3 class="mx-4 py-3 text-lg font-bold">{{ namespace }}</h3>
-
+                <div class="flex flex-col divide-y divide-y-reverse divide-gray-600 gap-4">
+                    <h3 class="mx-4 py-2 text-lg font-bold">{{ namespace }}</h3>
                     {% for link in links %}
-                    <a class="flex items-center justify-between mx-4 my-2 h-12 max-w-full rounded-xl hover:bg-slate-600 text-lg"
-                       href="{{ link.url }}" {% if link.new_tab %} target="_blank" {% endif %}>
-                        <span><i class="fa-regular fa-{{ link.icon }} mx-5 text-xl"></i><span>{{ link.name }}</span></span>
-                        <i class="fa-solid mx-2 {% if link.new_tab %}fa-arrow-up-right-from-square{% endif %}"></i>
-                    </a>
+                        <a class="flex items-center justify-between mx-4 h-12 max-w-full rounded-xl hover:bg-slate-600 text-lg"
+                           href="{{ link.url }}" {% if link.new_tab %} target="_blank" {% endif %}>
+                            <span>
+                                <span class="fa-regular fa-{{ link.icon }} mx-5 text-xl"></span>
+                                <span>{{ link.name }}</span>
+                            </span>
+                            <span class="fa-solid mx-2 {% if link.new_tab %}fa-arrow-up-right-from-square{% endif %}"></span>
+                        </a>
                     {% endfor %}
                 </div>
             {% endfor %}
@@ -29,25 +33,25 @@
 
 {% block head %}
     <script type="module">
-        const menuElement = document.querySelector("#sidebar")
-        menuElement.addEventListener("click", (event) => {
-            event.stopPropagation()
-        })
+        const menuElement = document.querySelector("#sidebar");
+        const overlayClasses = document.querySelector("#dark-overlay").classList;
+        menuElement.addEventListener("click", event => event.stopPropagation());
+
         document.addEventListener('click', () => {
-            menuElement.classList.remove("translate-x-72")
-        })
+            menuElement.classList.add("-translate-x-72");
+            overlayClasses.add('hidden');
+        });
+
         document.querySelector("#mobile-menu-btn").addEventListener('click', (event) => {
             event.stopPropagation();
-            menuElement.focus();
-            menuElement.classList.toggle("translate-x-72");
-        })
+            menuElement.classList.toggle("-translate-x-72");
+            overlayClasses.toggle('hidden')
+        });
     </script>
 {% endblock %}
 
 {% block navbar_links %}
     <li class="md:hidden">
-        <button id="mobile-menu-btn" type="button" class="p-2 mx-3 text-gray-300">
-            <i class="fa-solid fa-bars block"></i>
-        </button>
+        <button id="mobile-menu-btn" class="fa-solid fa-bars"></button>
     </li>
 {% endblock %}
