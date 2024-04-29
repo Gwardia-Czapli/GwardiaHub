@@ -19,10 +19,10 @@ We want to create website with Django, that will be useful to as many as three d
   - place to submit feedback about meetings,
   - assignments given on meetings.
 - For Genshin Impact players:
-  - wish simulator with character collection book,
+  - wish (it's something like lootboxes in Genshin) simulator with character collection book,
   - banners and events info,
   - daily check in reminder,
-  - Genshin inspired this module exclusive UI.
+  - Genshin inspired, this module exclusive, UI and UwU color theme.
 
 ## 🛠️ Installation guide for contributors
 
