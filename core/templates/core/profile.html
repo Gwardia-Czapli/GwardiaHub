@@ -8,7 +8,7 @@
 {% block content %}
     <div class="mt-32 w-screen flex flex-col items-center justify-center">
         <div class="flex gap-5 w-1/2 pb-4 border-b-2">
-            <img src="{% if user.avatar %}{{ user.avatar }}{% else %}{% static "placeholder_pfp.png" %}{% endif %}" alt="avatar" class="h-auto w-1/8 rounded-full">
+            <img src="{% if user.avatar %}{{ user.avatar }}{% else %}{% static "images/placeholder_profile_pic.png" %}{% endif %}" alt="avatar" class="h-auto w-1/8 rounded-full">
             <div class="flex flex-col">
                 <h1 class="text-4xl text-bold">{{ user.name }}</h1>
                 <div class="flex gap-4 text-gray-500 flex-wrap">
