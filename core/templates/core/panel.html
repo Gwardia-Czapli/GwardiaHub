@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="flex flex-row nowrap flex-grow h-full overflow-auto">
-        <div id="sidebar" class="flex hidden md:flex flex-col gap-y-3 fixed md:relative top-0 min-w-72 max-w-72 h-full bg-gray-800 shadow-2xl overflow-auto animate-slideIn md:animate-none border-r border-gray-600">
+        <div id="sidebar" class="flex md:flex flex-col gap-y-3 fixed md:relative top-0 left-[-18rem] md:left-0 md:translate-x-0 min-w-72 max-w-72 h-full bg-gray-800 shadow-2xl overflow-auto duration-300 md:duration-0 border-r border-gray-600">
             <a href="/" class="mx-4 pt-4 text-lg font-bold hover:underline">Strona Główna</a>
             {% for namespace, links in sidebar_links.items %}
                 <div class="flex flex-col divide-y divide-y-reverse divide-gray-600">
@@ -34,12 +34,12 @@
             event.stopPropagation()
         })
         document.addEventListener('click', () => {
-            menuElement.classList.add("hidden")
+            menuElement.classList.remove("translate-x-72")
         })
         document.querySelector("#mobile-menu-btn").addEventListener('click', (event) => {
             event.stopPropagation();
             menuElement.focus();
-            menuElement.classList.toggle("hidden");
+            menuElement.classList.toggle("translate-x-72");
         })
     </script>
 {% endblock %}
