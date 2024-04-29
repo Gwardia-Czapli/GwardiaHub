@@ -3,23 +3,24 @@
 {% block title %}Strona Główna{% endblock %}
 
 {% block head %}
-<script type="module">
-    const canvas = document.getElementById('starback-bg');
-    const starback = new Starback(canvas, {
-        type: 'dot',
-        quantity: 250,
-        height: window.innerHeight,
-        width: window.innerWidth,
-        backgroundColor: [],
-        randomOpacity: true,
-    });
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-
-    window.addEventListener('resize', resizeCanvas);
-</script>
+    <script src="https://unpkg.com/starback@2.1.1/dist/starback.global.js"></script>
+    <script type="module">
+        const canvas = document.getElementById('starback-bg');
+        const starback = new Starback(canvas, {
+            type: 'dot',
+            quantity: 250,
+            height: window.innerHeight,
+            width: window.innerWidth,
+            backgroundColor: [],
+            randomOpacity: true,
+        });
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+    
+        window.addEventListener('resize', resizeCanvas);
+    </script>
 {% endblock %}
 
 {% block content %}
@@ -32,7 +33,7 @@
 {% endblock %}
 
 {% block navbar_links %}
-<li>
-    <a href="{% url 'gwardia:index' %}" class="mr-5 text-gray-300 hover:underline" aria-current="page">Gwardia</a>
-</li>
+    <li>
+        <a href="{% url 'gwardia:index' %}" class="mr-5 text-gray-300 hover:underline" aria-current="page">Gwardia</a>
+    </li>
 {% endblock %}

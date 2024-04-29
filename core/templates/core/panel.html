@@ -9,24 +9,26 @@
         <div id="sidebar" class="flex hidden md:flex flex-col gap-y-3 fixed md:relative top-0 min-w-72 max-w-72 h-full bg-gray-800 shadow-2xl overflow-auto animate-slideIn md:animate-none border-r border-gray-600">
             <a href="/" class="mx-4 pt-4 text-lg font-bold hover:underline">Strona Główna</a>
             {% for namespace, links in sidebar_links.items %}
-            <div class="flex flex-col divide-y divide-y-reverse divide-gray-600">
-                <h3 class="mx-4 py-3 text-lg font-bold">{{ namespace }}</h3>
+                <div class="flex flex-col divide-y divide-y-reverse divide-gray-600">
+                    <h3 class="mx-4 py-3 text-lg font-bold">{{ namespace }}</h3>
 
-                {% for link in links %}
-                <a class="flex items-center justify-between mx-4 my-2 h-12 max-w-full rounded-xl hover:bg-slate-600 text-lg"
-                   href="{{ link.url }}" {% if link.new_tab %} target="_blank" {% endif %}>
-                    <span><i class="fa-regular fa-{{ link.icon }} mx-5 text-xl"></i><span>{{ link.name }}</span></span>
-                    <i class="fa-solid mx-2 {% if link.new_tab %}fa-arrow-up-right-from-square{% endif %}"></i>
-                </a>
-                {% endfor %}
-            </div>
+                    {% for link in links %}
+                    <a class="flex items-center justify-between mx-4 my-2 h-12 max-w-full rounded-xl hover:bg-slate-600 text-lg"
+                       href="{{ link.url }}" {% if link.new_tab %} target="_blank" {% endif %}>
+                        <span><i class="fa-regular fa-{{ link.icon }} mx-5 text-xl"></i><span>{{ link.name }}</span></span>
+                        <i class="fa-solid mx-2 {% if link.new_tab %}fa-arrow-up-right-from-square{% endif %}"></i>
+                    </a>
+                    {% endfor %}
+                </div>
             {% endfor %}
         </div>
         {% block panel_content %}
         {% endblock %}
     </div>
-    
-    <script>
+{% endblock %}
+
+{% block head %}
+    <script type="module">
         const menuElement = document.querySelector("#sidebar")
         menuElement.addEventListener("click", (event) => {
             event.stopPropagation()
@@ -35,21 +37,17 @@
             menuElement.classList.add("hidden")
         })
         document.querySelector("#mobile-menu-btn").addEventListener('click', (event) => {
-            event.stopPropagation()
-            menuElement.focus()
-            if (menuElement.classList.contains("hidden")) {
-                menuElement.classList.remove("hidden")
-            } else {
-                menuElement.classList.add("hidden")
-            }
+            event.stopPropagation();
+            menuElement.focus();
+            menuElement.classList.toggle("hidden");
         })
     </script>
 {% endblock %}
 
 {% block navbar_links %}
     <li class="md:hidden">
-        <button id="mobile-menu-btn" type="button" class="inline-flex items-center justify-evenly p-2 mr-3 text-gray-300 focus:no-underline">
-            <i class="fa-solid fa-bars block ml-2"></i>
+        <button id="mobile-menu-btn" type="button" class="p-2 mx-3 text-gray-300">
+            <i class="fa-solid fa-bars block"></i>
         </button>
     </li>
 {% endblock %}
