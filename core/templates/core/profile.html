@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+{% load core_extras %}
+
+{% block title %}{{ user.name }}{% endblock %}
+
+{% block content %}
+    <div class="mt-32 flex flex-col items-center">
+        <div class="flex gap-5 md:w-1/2 w-3/4 pb-4 border-b-2">
+            <img src="{% if user.avatar %}{{ user.avatar }}{% else %}{% static "images/placeholder_profile_pic.png" %}{% endif %}" alt="Profile picture" class="lg:w-[12.5%] lg:h-[12.5%] md:w-1/6 md:h-1/6 w-1/4 h-1/4 rounded-full">
+            <div class="flex flex-col">
+                <h1 class="text-4xl text-bold">{{ user.name }}</h1>
+                <div class="flex gap-4 text-gray-500 flex-wrap">
+                    {% for role in user.roles %}
+                        <p>{{ role }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <h1 class="text-2xl mt-4">Doświadczenie</h1>
+        <div class="flex flex-col md:w-1/2 w-3/4 gap-5">
+            <div class="flex gap-5 mt-4 text-purple-500 justify-end">
+                <p>Poziom: {{ user.level }}</p>
+                <p>Doświadczenie: {{ user.exp }}</p>
+            </div>
+            <div class="border-2 border-gray-600 rounded-2xl h-[3svh] overflow-hidden w-full">
+                <div class="h-full  w-[{{ user.exp|calculate_percentage:user.max_exp }}%]">
+                    <div class="bg-fixed bg-gradient-to-r from-[#663dff] from-[0%] via-[#aa00ff] via-[37%] to-[#cc4499] rounded-s-2xl h-full w-full animate-levelBarSlideIn"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
