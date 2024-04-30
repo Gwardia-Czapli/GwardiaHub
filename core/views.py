@@ -36,3 +36,8 @@ def gh_webhook(request):
         return HttpResponse(handle_webhook(request))
     except KeyError:
         return HttpResponse("Invalid request", status=500)
+
+
+def handling_404(request, exception):
+    return render(request, "404.html", {})
+

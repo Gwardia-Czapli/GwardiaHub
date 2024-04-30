@@ -24,3 +24,5 @@ urlpatterns = [
     path("panel/", include("gwardia.urls")),
     path("admin/", admin.site.urls),
 ]
+
+handler404 = "core.views.handling_404"
