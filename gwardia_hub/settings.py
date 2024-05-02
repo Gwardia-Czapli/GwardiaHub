@@ -32,7 +32,7 @@ environ.Env.read_env(BASE_DIR / ".env")
 SECRET_KEY = env("SECRET_KEY", default=get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG_PROPAGATE_EXCEPTIONS = True
+DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0"]
 CSRF_TRUSTED_ORIGINS = []
@@ -75,7 +75,7 @@ ROOT_URLCONF = "gwardia_hub.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "templates")],
+        "DIRS": [os.path.join(BASE_DIR)],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

@@ -1,26 +1,14 @@
-from django.shortcuts import render, HttpResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
-
-from .gh_webhook_handling import handle_webhook
+from django.shortcuts import render
 
 
 def index(request):
-    context = {
-        "navbar_links": [
-            {
-                "name": "Panel",
-                "url": "panel/",
-            },
-        ]
-    }
-    return render(request, "core/index.html", context)
+    return render(request, "core/index.html")
 
 
-def profile(request, name: str):
+def profile(request):
     # Those are placeholder data
     user = {
-        "name": name,
+        "name": "Salieri",
         "roles": ["root", "Gwardyjczyk", "Genshiniara"],
         "level": "42",
         "exp": "621",
@@ -29,15 +17,5 @@ def profile(request, name: str):
     return render(request, "core/profile.html", context={"user": user})
 
 
-@csrf_exempt
-@require_POST
-def gh_webhook(request):
-    try:
-        return HttpResponse(handle_webhook(request))
-    except KeyError:
-        return HttpResponse("Invalid request", status=500)
-
-
 def handling_404(request, exception):
-    return render(request, "404.html", {})
-
+    return render(request, "core/404.html")
