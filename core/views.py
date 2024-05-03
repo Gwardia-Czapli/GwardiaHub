@@ -19,3 +19,7 @@ def profile(request):
 
 def handling_404(request, exception):
     return render(request, "core/404.html")
+
+
+def handling_500(request):
+    return render(request, "core/500.html")
