@@ -3,30 +3,37 @@
 {% block title %}Strona Główna{% endblock %}
 
 {% block head %}
-<script type="module">
-    const canvas = document.getElementById('starback-bg');
-    const starback = new Starback(canvas, {
-        type: 'dot',
-        quantity: 250,
-        height: window.innerHeight,
-        width: window.innerWidth,
-        backgroundColor: [],
-        randomOpacity: true,
-    });
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-
-    window.addEventListener('resize', resizeCanvas);
-</script>
+    <script src="https://unpkg.com/starback@2.1.1/dist/starback.global.js"></script>
+    <script type="module">
+        const canvas = document.getElementById('starback-bg');
+        const starback = new Starback(canvas, {
+            type: 'dot',
+            quantity: 250,
+            height: window.innerHeight,
+            width: window.innerWidth,
+            backgroundColor: [],
+            randomOpacity: true,
+        });
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+    
+        window.addEventListener('resize', resizeCanvas);
+    </script>
 {% endblock %}
 
 {% block content %}
-    <canvas id="starback-bg" class="fixed -z-1"></canvas>
+    <canvas id="starback-bg" class="fixed -z-10"></canvas>
 
-    <div class="z-1 relative flex flex-col items-center justify-center h-5/6 text-center">
+    <div class="relative flex flex-col items-center justify-center h-5/6 text-center">
         <span>Strona internetowa, która ma służyć pomocą szkolną oraz efektywnym zarządzaniem aktywnościami Gwardii.</span>
         <span class="font-bold">W trakcie programowania!</span>
     </div>
+{% endblock %}
+
+{% block navbar_links %}
+    <li>
+        <a href="{% url 'gwardia:index' %}" class="hover:underline">Gwardia</a>
+    </li>
 {% endblock %}
