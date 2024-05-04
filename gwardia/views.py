@@ -22,10 +22,6 @@ SIDEBAR_LINKS = {
 }
 
 
-def asdf(a):
-    asdf(1)
-
-
 def meetings(request):
     upcoming_meetings = Meeting.objects.filter(date__gte=timezone.now()).order_by(
         "-date"
