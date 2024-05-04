@@ -2,7 +2,15 @@ from django.shortcuts import render
 
 
 def index(request):
-    return render(request, "core/index.html")
+    context = {
+        "navbar_links": [
+            {
+                "name": "Gwardia",
+                "url": "panel/gwardia/",
+            },
+        ]
+    }
+    return render(request, "core/index.html", context)
 
 
 def profile(request):

@@ -1,5 +1,7 @@
 {% extends 'core/base.html' %}
 
+{% load core_extras %}
+
 {% block title %}Strona Główna{% endblock %}
 
 {% block head %}
@@ -24,6 +26,7 @@
 {% endblock %}
 
 {% block content %}
+    {% navbar navbar_links %}
     <canvas id="starback-bg" class="fixed -z-10"></canvas>
 
     <div class="relative flex flex-col items-center justify-center h-5/6 text-center">

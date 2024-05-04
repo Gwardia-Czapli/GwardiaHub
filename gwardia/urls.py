@@ -4,5 +4,6 @@ from . import views
 
 app_name = "gwardia"
 urlpatterns = [
-    path("", views.index, name="index"),
+    path("", views.meetings, name="index"),
+    path("asdf", views.asdf, name="asdf"),
 ]

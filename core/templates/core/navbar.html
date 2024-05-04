@@ -1,0 +1,23 @@
+<nav class="flex flex-nowrap justify-between w-full p-1 bg-gray-950 border-b border-gray-600 text-gray-300">
+    <div class="flex flex-nowrap items-center gap-4">
+        <a href="https://github.com/Gwardia-Czapli/GwardiaHub" class="flex items-center transition-colors duration-300 ml-2 md:ml-5 hover:text-blue-100" target="_blank">
+            <span class="fa-brands fa-github fa-2x"></span>
+        </a>
+        <a href="https://github.com/Gwardia-Czapli/GwardiaHub" class="text-md md:text-xl font-bold">GwardiaHub</a>
+    </div>
+    <ul class="flex justify-between items-center gap-4 m-2">
+        {% for link in navbar_links %}
+        <li>
+            <a href="{{ link.url }}">
+                {{ link.name }}
+            </a>
+        </li>
+        {% endfor %}
+        <li>
+            <a href="{% url 'core:profile' %}">
+                <img class="rounded-full h-8"
+                    src="https://better-default-discord.netlify.app/Icons/Gradient-Blue.png" alt="user photo" title="TODO: your nickname" />
+            </a>
+        </li>
+    </ul>
+</nav>

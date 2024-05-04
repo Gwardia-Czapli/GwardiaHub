@@ -5,7 +5,7 @@ from .models import Meeting
 
 SIDEBAR_LINKS = {
     "Gwardia": [
-        {"name": "Spotkania", "url": "/gwardia", "icon": "calendar-days"},
+        {"name": "Spotkania", "url": "/panel/gwardia", "icon": "calendar-days"},
         {"name": "Ankiety", "url": "#", "icon": "square-poll-horizontal"},
         {
             "name": "Prezentacje",
@@ -22,7 +22,11 @@ SIDEBAR_LINKS = {
 }
 
 
-def index(request):
+def asdf(a):
+    asdf(1)
+
+
+def meetings(request):
     upcoming_meetings = Meeting.objects.filter(date__gte=timezone.now()).order_by(
         "-date"
     )
@@ -34,4 +38,4 @@ def index(request):
         "archival_meetings": archival_meetings,
         "sidebar_links": SIDEBAR_LINKS,
     }
-    return render(request, "gwardia/index.html", context)
+    return render(request, "gwardia/meetings.html", context)
