@@ -14,11 +14,11 @@
         </div>
         <ul class="flex justify-between items-center gap-4 m-2">
             {% for link in navbar_links %}
-            <li>
-                <a href="{{ link.url }}">
-                    {{ link.name }}
-                </a>
-            </li>
+                <li>
+                    <a href="{{ link.url }}">
+                        {{ link.name }}
+                    </a>
+                </li>
             {% endfor %}
             <li>
                 <a href="{% url 'core:profile' %}">

@@ -6,7 +6,7 @@ def index(request):
         "navbar_links": [
             {
                 "name": "Gwardia",
-                "url": "panel/gwardia/",
+                "url": "panel/",
             },
         ]
     }

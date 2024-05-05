@@ -1,11 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils import timezone
 
 from .models import Meeting
 
 SIDEBAR_LINKS = {
     "Gwardia": [
-        {"name": "Spotkania", "url": "/panel/gwardia", "icon": "calendar-days"},
+        {
+            "name": "Spotkania",
+            "url": "/panel/gwardia/meetings",
+            "icon": "calendar-days",
+        },
         {"name": "Ankiety", "url": "#", "icon": "square-poll-horizontal"},
         {
             "name": "Prezentacje",
@@ -20,6 +24,12 @@ SIDEBAR_LINKS = {
         {"name": "Zadania", "url": "#", "icon": "paste"},
     ],
 }
+
+
+# There is link to /panel in navbar, but there is no such view as /panel, so for now it's redirecting
+# to /panel/gwardia/meetings
+def index(request):
+    return redirect("gwardia:meetings")
 
 
 def meetings(request):

@@ -8,6 +8,6 @@ def calculate_percentage(value, arg):
     return str((float(value) / float(arg)) * 100).replace(",", ".")
 
 
-@register.inclusion_tag("core/navbar.html")
+@register.inclusion_tag("components/navbar.html")
 def navbar(navbar_links):
     return {"navbar_links": navbar_links}
