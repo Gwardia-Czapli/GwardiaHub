@@ -8,10 +8,11 @@
 {% block panel_content %}
     <div class="mt-32 flex flex-col items-center w-full">
         <div class="flex gap-5 md:w-1/2 w-3/4 pb-4 border-b-2">
-            <img src="{% if user.avatar %}{{ user.avatar }}{% else %}{% static "images/placeholder_profile_pic.png" %}{% endif %}" alt="Profile picture" class="h-20 w-20 object-cover rounded-full">
+            {% static "images/placeholder_profile_pic.png" as placeholder_profile_pic %}
+            <img src="{{ user.avatar|default:placeholder_profile_pic }}" alt="Profile picture" class="h-20 w-20 object-cover rounded-full">
             <div class="flex flex-col">
                 <h1 class="text-4xl text-bold">{{ user.name }}</h1>
-                <div class="flex gap-4 text-gray-500 flex-wrap">
+                <div class="flex gap-x-4 text-gray-500 flex-wrap">
                     {% for role in user.roles %}
                         <p>{{ role }}</p>
                     {% endfor %}
@@ -26,7 +27,7 @@
             </div>
             <div class="border-2 border-gray-600 rounded-2xl h-7 overflow-hidden w-full">
                 <div class="h-full  w-[{{ user.exp|calculate_percentage:user.max_exp }}%]">
-                    <div class="w-full bg-fixed bg-gradient-to-r bg-[#18369c] from-[#18369c] from-[35%] via-[#8116d9] via-[60%] to-[#ff0087] rounded-s-2xl h-full w-full rounded-full animate-levelBarSlideIn"></div>
+                    <div class="w-full bg-fixed bg-gradient-to-r bg-[#18369c] from-[#18369c] md:from-[35%] via-[#8116d9] via-[60%] to-[#ff0087] rounded-s-2xl h-full w-full rounded-full animate-levelBarSlideIn"></div>
                 </div>
             </div>
         </div>
