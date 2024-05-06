@@ -12,30 +12,26 @@
             </a>
             <a href="https://github.com/Gwardia-Czapli/GwardiaHub" class="text-md md:text-xl font-bold">GwardiaHub</a>
         </div>
-        <ul class="flex justify-between items-center gap-4 m-2">
-            {% for link in navbar_links %}
-                <li>
-                    <a href="{{ link.url }}">
-                        {{ link.name }}
-                    </a>
-                </li>
-            {% endfor %}
-            <li>
-                <a href="{% url 'core:profile' %}">
-                    <img class="rounded-full h-8"
-                        src="https://better-default-discord.netlify.app/Icons/Gradient-Blue.png" alt="user photo" title="TODO: your nickname" />
-                </a>
-            </li>
-        </ul>
+        <div class="flex justify-between items-center gap-4 m-2">
+            <a href="{% url 'core:profile' 'TODO: Your nickname' %}">
+                <img class="rounded-full h-8"
+                    src="https://better-default-discord.netlify.app/Icons/Gradient-Blue.png"
+                    alt="User profile picture" title="TODO: Your nickname"
+                />
+            </a>
+            <div class="md:hidden">
+                <button id="mobile-menu-btn" class="fa-solid fa-bars"></button>
+            </div>
+        </div>
     </nav>
     <div class="fixed bg-gray-900 opacity-70 h-full w-full hidden" id="dark-overlay"></div>
-    <div class="flex bg-gray-900 flex-row h-full overflow-auto">
+    <div class="flex flex-row h-full overflow-auto">
         <div id="sidebar" class="flex flex-col gap-y-3 fixed md:relative top-0 -translate-x-72 md:translate-x-0
             duration-300 min-w-72 w-72 h-full bg-gray-800 overflow-auto border-r border-gray-600">
             <a href="/" class="mx-4 pt-4 text-lg font-bold hover:underline">Strona Główna</a>
             {% for namespace, links in sidebar_links.items %}
-                <div class="flex flex-col divide-y divide-y-reverse divide-gray-600 gap-4">
-                    <h3 class="mx-4 py-2 text-lg font-bold">{{ namespace }}</h3>
+                <div class="flex flex-col divide-y divide-y-reverse divide-gray-600 gap-2">
+                    <h3 class="mx-4 pt-2 text-lg font-bold">{{ namespace }}</h3>
                     {% for link in links %}
                         <a class="flex items-center justify-between mx-4 h-12 max-w-full rounded-xl hover:bg-slate-600 text-lg"
                            href="{{ link.url }}" {% if link.new_tab %} target="_blank" {% endif %}>
