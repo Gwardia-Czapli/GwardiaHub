@@ -18,9 +18,6 @@ SIDEBAR_LINKS = {
         {"name": "Sprawdziany", "url": "#", "icon": "newspaper"},
         {"name": "Zadania", "url": "#", "icon": "paste"},
     ],
-    "Główne": [
-        {"name": "Twój Profil", "url": "/panel/profile/example", "icon": "user"},
-    ],
 }
 
 
