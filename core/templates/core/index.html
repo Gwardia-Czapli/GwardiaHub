@@ -27,16 +27,10 @@
 
 {% block content %}
     {% navbar navbar_links %}
-    <canvas id="starback-bg" class="fixed -z-10"></canvas>
+    <canvas id="starback-bg" class="fixed -z-10 bg-gray-950"></canvas>
 
     <div class="relative flex flex-col items-center justify-center h-5/6 text-center">
         <span>Strona internetowa, która ma służyć pomocą szkolną oraz efektywnym zarządzaniem aktywnościami Gwardii.</span>
         <span class="font-bold">W trakcie programowania!</span>
     </div>
-{% endblock %}
-
-{% block navbar_links %}
-    <li>
-        <a href="{% url 'gwardia:index' %}" class="hover:underline">Gwardia</a>
-    </li>
 {% endblock %}

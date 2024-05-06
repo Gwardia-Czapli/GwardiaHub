@@ -5,7 +5,7 @@ def index(request):
     context = {
         "navbar_links": [
             {
-                "name": "Gwardia",
+                "name": "Panel",
                 "url": "panel/",
             },
         ]

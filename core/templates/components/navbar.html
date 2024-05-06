@@ -5,19 +5,13 @@
         </a>
         <a href="https://github.com/Gwardia-Czapli/GwardiaHub" class="text-md md:text-xl font-bold">GwardiaHub</a>
     </div>
-    <ul class="flex justify-between items-center gap-4 m-2">
+    <ul class="flex justify-between items-center gap-4 m-3">
         {% for link in navbar_links %}
-        <li>
-            <a href="{{ link.url }}">
-                {{ link.name }}
-            </a>
-        </li>
+            <li>
+                <a href="{{ link.url }}">
+                    {{ link.name }}
+                </a>
+            </li>
         {% endfor %}
-        <li>
-            <a href="{% url 'core:profile' %}">
-                <img class="rounded-full h-8"
-                    src="https://better-default-discord.netlify.app/Icons/Gradient-Blue.png" alt="user photo" title="TODO: your nickname" />
-            </a>
-        </li>
     </ul>
 </nav>

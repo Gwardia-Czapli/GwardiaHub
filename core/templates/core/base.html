@@ -7,9 +7,9 @@
         <meta property="og:title" content="Gwardia Czapli">
         <meta property="og:description" content="We are learning programming, scripting, website designing and more!">
         <meta property="og:url" content="https://gwardiahub.fly.dev/">
-        <meta name="theme-color" media="(prefers-color-scheme: light)" content="010998" />
-        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="002093" />
+
         <title>GwardiaHub | {% block title %}{% endblock %}</title>
+
         <script src="https://cdn.tailwindcss.com"></script>
         {% load static %}
         <script src="{% static "tailwind_custom_styles.js" %}"></script>
@@ -17,10 +17,11 @@
         <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    
         {% block head %}
         {% endblock %}
     </head>
-    <body class="bg-gray-900 text-gray-50">
+    <body class="text-gray-50">
         <main class="flex flex-col h-screen w-screen">
             {% language 'pl-pl' %}
                 {% block content %}
