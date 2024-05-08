@@ -1,6 +1,9 @@
+from datetime import datetime, timedelta
+
 import requests
 from django.core.handlers.wsgi import WSGIRequest
 from django.urls import reverse
+from django.utils import timezone
 from requests import HTTPError
 from requests.exceptions import JSONDecodeError
 
@@ -22,43 +25,42 @@ def authorise_code(request: WSGIRequest) -> dict[str, str] | None:
     data = {
         "grant_type": "authorization_code",
         "code": code,
-        "redirect_uri": request.build_absolute_uri(reverse("discord_callback")),
+        "redirect_uri": request.build_absolute_uri(reverse("core:discord_code")),
     }
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
-    r = requests.post(
+    response = requests.post(
         f"{API_ENDPOINT}/oauth2/token",
         data=data,
         headers=headers,
         auth=(CLIENT_ID, CLIENT_SECRET),
     )
     try:
-        r.raise_for_status()
+        response.raise_for_status()
     except HTTPError:
         return None
-    return r.json()
+    return response.json()
 
 
 def refresh_access_token(refresh_token):
     data = {"grant_type": "refresh_token", "refresh_token": refresh_token}
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
-    r = requests.post(
+    response = requests.post(
         f"{API_ENDPOINT}/oauth2/token",
         data=data,
         headers=headers,
         auth=(CLIENT_ID, CLIENT_SECRET),
     )
-    if r.status_code == 401:
+    if not response.ok:
         return None
-    r.raise_for_status()
-    return r.json()
+    return response.json()
 
 
-def fetch_guild_member(access_token: str) -> User | None:
+def fetch_user(access_token: str) -> User | None:
     headers = {
         "Authorization": f"Bearer {access_token}",
     }
     response = requests.get(
-        f"{API_ENDPOINT}/users/@me/guilds/{GUILD_ID}/member",
+        f"{API_ENDPOINT}/oauth2/@me",
         headers=headers,
     )
     if not response.ok:
@@ -71,13 +73,38 @@ def fetch_guild_member(access_token: str) -> User | None:
     user = User.objects.get_or_create(discord_id=json["user"]["id"])[0]
     user.username = json["user"]["global_name"] or json["user"]["username"]
     user.avatar_hash = json["user"]["avatar"]
-    user.roles.set([])
+    if user.data_valid_until < timezone.now():
+        if fetch_user_details(access_token):
+            user.data_valid_until = datetime.now() + timedelta(minutes=10)
+    user.save()
+
+    return user
+
+
+def fetch_user_details(access_token: str) -> bool:
+    """
+    :param access_token: access token for Discord API
+    :return: True if data was fetched successfully
+    """
+
+    headers = {
+        "Authorization": f"Bearer {access_token}",
+    }
+    response = requests.get(
+        f"{API_ENDPOINT}/users/@me/guilds/{GUILD_ID}/member",
+        headers=headers,
+    )
+    if not response.ok:
+        return False
+    try:
+        json = response.json()
+    except JSONDecodeError:
+        return False
+    user = User.objects.get_or_create(discord_id=json["user"]["id"])[0]
     for role_id in json["roles"]:
         try:
             role = UserRole.objects.get(id=role_id)
             user.roles.add(role)
         except UserRole.DoesNotExist:
             pass
-    user.save()
-
-    return user
+    return True

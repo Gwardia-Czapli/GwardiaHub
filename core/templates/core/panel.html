@@ -14,12 +14,16 @@
             <a href="https://github.com/Gwardia-Czapli/GwardiaHub" class="text-md md:text-xl font-bold">GwardiaHub</a>
         </div>
         <div class="flex justify-between items-center gap-4 m-2">
-            <a href="{% url 'core:profile' 'TODO: Your nickname' %}">
+            <a href="{% url 'core:profile' %}">
                 <img class="rounded-full h-8"
-                    src="https://better-default-discord.netlify.app/Icons/Gradient-Blue.png"
-                    alt="User profile picture" title="TODO: Your nickname"
+                    src="{{ user.avatar }}"
+                    alt="User profile picture"
                 />
             </a>
+            <form method="post" action="{% url 'core:logout' %}">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
             <div class="md:hidden">
                 <button id="mobile-menu-btn" class="fa-solid fa-bars"></button>
             </div>
