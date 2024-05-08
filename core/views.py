@@ -1,19 +1,21 @@
 from urllib.parse import urlencode
+
+from django.http import HttpRequest
+from django.urls import reverse
 from django.shortcuts import redirect
 from core.discord_api import (
     CLIENT_ID,
     DISCORD_REFRESH_COOKIE,
-    REDIRECT_URI,
-    code_to_token,
-    refresh_token,
+    authorise_code,
+    refresh_access_token,
 )
-from core.discord_auth import go_back, require_discord_login, set_cookies
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.templatetags.static import static
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
+from core.discord_auth import go_back, require_discord_login, set_token_cookies
 from core.gh_webhook_handling import handle_webhook
 
 
@@ -30,14 +32,15 @@ def index(request):
 
 
 @require_discord_login()
-def profile(request, name: str, _):
+def profile(request, name: str, user):
     # Those are placeholder data
     user = {
-        "name": name,
-        "roles": ["root", "Gwardyjczyk", "Genshiniara"],
-        "level": "42",
-        "exp": "621",
-        "max_exp": "2137",
+        "name": user.username,
+        "roles": user.role_names(),
+        "level": 42,
+        "exp": 621,
+        "max_exp": 2137,
+        "avatar": user.avatar_url(),
     }
     return render(request, "core/profile.html", context={"user": user})
 
@@ -46,23 +49,25 @@ def login(request):
     return render(request, "core/login.html")
 
 
-def discord_login(_):
+def discord_login(request: HttpRequest):
     query = urlencode(
         {
             "client_id": CLIENT_ID,
             "response_type": "code",
-            "redirect_uri": REDIRECT_URI,
+            "redirect_uri": request.build_absolute_uri(reverse("core:discord_code")),
             "scope": "identify guilds.members.read",
-            "prompt": "none",
+            "prompt": "confirm",
         }
     )
     return redirect(f"https://discord.com/oauth2/authorize?{query}")
 
 
 def discord_code(request):
-    code = request.GET["code"]
-    auth_data = code_to_token(code)
-    return set_cookies(go_back(request), auth_data)
+    auth_data = authorise_code(request)
+    if auth_data is None:
+        return redirect("core:login")
+
+    return set_token_cookies(go_back(request), auth_data)
 
 
 def discord_refresh(request):
@@ -70,7 +75,7 @@ def discord_refresh(request):
     if token is None:
         return redirect("core:login")
 
-    return set_cookies(go_back(request), refresh_token(token))
+    return set_token_cookies(go_back(request), refresh_access_token(token))
 
 
 @csrf_exempt
