@@ -18,8 +18,18 @@ def profile(request):
 
 
 def handling_404(request, exception):
-    return render(request, "core/404.html")
+    context = {
+        "error_id": "404",
+        "description": "Ojej! Wygląda na to, że jesteś teraz na drodze do nikąd :o",
+        "image": "images/404_image.png",
+    }
+    return render(request, "core/404.html", context)
 
 
 def handling_500(request):
-    return render(request, "core/500.html")
+    context = {
+        "error_id": "500",
+        "description": "Ojej, coś jest nie tak z naszym serwerem :(",
+        "image": "images/500_image.png",
+    }
+    return render(request, "core/500.html", context)

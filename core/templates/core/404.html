@@ -4,11 +4,12 @@
 <div class="h-80vh w-screen my-28 flex items-center">
     <div class="container flex md:flex-row items-center justify-between px-20 text-gray-700">
         <div class="w-full mx-8">
-            <div class="text-7xl text-gray-600 font-dark font-extrabold mb-8">404</div>
-            <p class="text-2xl md:text-3xl font-light leading-normal mb-8">Ojej! Wygląda na to, że jesteś teraz na drodze do nikąd :o</p>
+            <div class="text-7xl text-gray-600 font-dark font-extrabold mb-8">{{ error_id }}</div>
+            <p class="text-2xl md:text-3xl font-light leading-normal mb-8">{{ description }}</p>
         </div>
         <div class="w-full lg:flex lg:justify-end lg:w-1/2 mx-5 my-12">
-            <img src="https://cdn.discordapp.com/attachments/1233197360465838161/1235649630729932942/uwu.png?ex=663523e5&is=6633d265&hm=25f895c70be1b5b5f92c171775ad9b4881c7d61d4b7e6e65d5a7188d1efa1603&"/>
+            {% load static %}
+            <img src="{% static 'images/404_image.png' %} alt='Error img"/>
         </div>
     </div>
 </div>
