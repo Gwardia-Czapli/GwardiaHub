@@ -12,6 +12,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="meeting",
             name="duration",
-            field=models.CharField(default="0oO"),
+            field=models.CharField,
         ),
     ]
