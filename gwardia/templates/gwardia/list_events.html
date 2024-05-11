@@ -7,8 +7,10 @@
                     <p class="text-orange-300 text-right w-full ">Archiwalne</p>
                 {% endif %}
                 <p class="w-full">
-                    <span class="break-words font-bold">{{ event.title }}</span>
                     <span class="float-right">{{ event.date }}</span>
+                    <br>
+                    <span class="break-words font-bold">{{ event.title }}</span>
+                    <span class="float-right">Czas trwania: {{ event.duration }} </span>
                 </p>
                 <p class="js-meeting-description border-gray-500 pt-5 w-full break-words border-t-2 hidden">
                     {{ event.description|linebreaksbr }}
