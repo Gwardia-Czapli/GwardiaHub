@@ -2,13 +2,21 @@ from django.shortcuts import render
 
 
 def index(request):
-    return render(request, "core/index.html")
+    context = {
+        "navbar_links": [
+            {
+                "name": "Panel",
+                "url": "panel/",
+            },
+        ]
+    }
+    return render(request, "core/index.html", context)
 
 
-def profile(request):
+def profile(request, name: str):
     # Those are placeholder data
     user = {
-        "name": "Salieri",
+        "name": name,
         "roles": ["root", "Gwardyjczyk", "Genshiniara"],
         "level": "42",
         "exp": "621",

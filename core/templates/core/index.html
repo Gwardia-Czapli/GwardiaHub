@@ -24,16 +24,15 @@
 {% endblock %}
 
 {% block content %}
-    <canvas id="starback-bg" class="fixed -z-10"></canvas>
+    <canvas id="starback-bg" class="fixed -z-10 bg-gray-950"></canvas>
 
-    <div class="relative flex flex-col items-center justify-center h-5/6 text-center">
+    <div class="relative flex flex-col items-center justify-center h-full text-center">
         <span>Strona internetowa, która ma służyć pomocą szkolną oraz efektywnym zarządzaniem aktywnościami Gwardii.</span>
         <span class="font-bold">W trakcie programowania!</span>
-    </div>
-{% endblock %}
 
-{% block navbar_links %}
-    <li>
-        <a href="{% url 'gwardia:index' %}" class="hover:underline">Gwardia</a>
-    </li>
+        {# ToDo: Change this link /login if user is not logged in #}
+        <a class="mt-10 p-5 cursor-pointer ease-in-out duration-500 border-4 font-bold text-xl rounded-2xl bg-gradient-to-r from-[#4f16d9] to-[#9400ff] hover:shadow-[0_0_20px_10px_#4f16d9] hover:scale-110" href="{% url "gwardia:meetings" %}">
+            Otwórz panel
+        </a>
+    </div>
 {% endblock %}

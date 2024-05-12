@@ -7,9 +7,9 @@
         <meta property="og:title" content="Gwardia Czapli">
         <meta property="og:description" content="We are learning programming, scripting, website designing and more!">
         <meta property="og:url" content="https://gwardiahub.fly.dev/">
-        <meta name="theme-color" media="(prefers-color-scheme: light)" content="010998" />
-        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="002093" />
+
         <title>GwardiaHub | {% block title %}{% endblock %}</title>
+
         <script src="https://cdn.tailwindcss.com"></script>
         {% load static %}
         <script src="{% static "tailwind_custom_styles.js" %}"></script>
@@ -17,29 +17,12 @@
         <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    
         {% block head %}
         {% endblock %}
     </head>
     <body class="bg-gray-900 text-gray-50">
         <main class="flex flex-col h-screen w-screen">
-            <nav class="flex flex-nowrap justify-between w-full p-1 bg-gray-950 border-b border-gray-600 text-gray-300">
-                <div class="flex flex-nowrap items-center gap-4">
-                    <a href="https://github.com/Gwardia-Czapli/GwardiaHub" class="flex items-center transition-colors duration-300 ml-2 md:ml-5 hover:text-blue-100" target="_blank">
-                        <span class="fa-brands fa-github fa-2x"></span>
-                    </a>
-                    <a href="/" class="text-md md:text-xl font-bold">GwardiaHub</a>
-                </div>
-                <ul class="flex justify-between items-center gap-4 m-2">
-                    {% block navbar_links %}
-                    {% endblock %}
-                    <li>
-                        <a href="{% url 'core:profile' %}">
-                            <img class="rounded-full h-8"
-                                src="https://better-default-discord.netlify.app/Icons/Gradient-Blue.png" alt="user photo" title="TODO: your nickname" />
-                        </a>
-                    </li>
-                </ul>
-            </nav>
             {% language 'pl-pl' %}
                 {% block content %}
                 {% endblock %}
