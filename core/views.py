@@ -35,4 +35,4 @@ def gh_webhook(request):
     try:
         return HttpResponse(handle_webhook(request))
     except KeyError:
-        return HttpResponse("Invalid request")
+        return HttpResponse("Invalid request", status=500)

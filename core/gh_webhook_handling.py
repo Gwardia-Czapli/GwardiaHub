@@ -23,29 +23,30 @@ class Issue(Enum):
 
 def handle_webhook(request: WSGIRequest):
     payload = json.loads(request.body)
-    if not verify_secret(
+    correct = verify_secret(
         env("GH_WEBHOOK_SECRET"), request.body, request.headers["X-Hub-Signature-256"]
-    ):
+    )
+    if not correct:
         print("Invalid signature")
         return
     request_type = request.headers["X-GitHub-Event"]
     user = payload["sender"]["login"]
+    action = payload["action"]
     if request_type == "pull_request":
-        action = handle_pr(payload)
+        action = handle_pr(payload, action)
     elif request_type == "issues":
-        action = handle_issue(payload)
+        action = handle_issue(payload, action)
     else:
         return
     # TODO: Implement adding to db
     print(user, action)
 
 
-def handle_pr(payload):
-    action = payload["action"]
+def handle_pr(payload, action):
     if action == "opened":
         action = PR.OPENED
     elif action == "closed":
-        if payload["pull_request"]["merged"]:
+        if ["pull_request"]["merged"]:
             action = PR.MERGED
         else:
             action = PR.CLOSED
@@ -54,14 +55,14 @@ def handle_pr(payload):
     return action
 
 
-def handle_issue(payload):
-    action = payload["action"]
+def handle_issue(payload, action):
     if action == "opened":
         action = Issue.OPENED
     elif action == "closed":
-        if payload["issue"]["state_reason"] == "completed":
+        state_reason = payload["issue"]["state_reason"]
+        if state_reason == "completed":
             action = Issue.COMPLETED
-        elif payload["issue"]["state_reason"] == "not_planned":
+        elif state_reason == "not_planned":
             action = Issue.NOT_PLANNED
     return action
 
