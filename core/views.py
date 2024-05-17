@@ -1,4 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+
+from .gh_webhook_handling import handle_webhook
 
 
 def index(request):
@@ -23,3 +27,9 @@ def profile(request, name: str):
         "max_exp": "2137",
     }
     return render(request, "core/profile.html", context={"user": user})
+
+
+@csrf_exempt
+@require_POST
+def gh_webhook(request):
+    return HttpResponse(handle_webhook(request))
