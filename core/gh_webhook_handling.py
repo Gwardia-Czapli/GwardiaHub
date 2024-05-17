@@ -1,40 +1,74 @@
+from enum import Enum, auto
+import hashlib
+import hmac
 import json
 
+from gwardia_hub.settings import env
 
-def handle_webhook(request):
+from django.core.handlers.wsgi import WSGIRequest
+
+
+class PR(Enum):
+    OPENED = auto()
+    CLOSED = auto()
+    MERGED = auto()
+    REOPENED = auto()
+
+
+class Issue(Enum):
+    OPENED = auto()
+    COMPLETED = auto()
+    NOT_PLANNED = auto()
+
+
+def handle_webhook(request: WSGIRequest):
     payload = json.loads(request.body)
-    request_type = request.headers.get("X-GitHub-Event")
-    if request_type == "ping":
-        return "pong"
-    elif request_type == "pull_request":
-        return handle_pr(payload)
+    if not verify_secret(
+        env("GH_WEBHOOK_SECRET"), request.body, request.headers["X-Hub-Signature-256"]
+    ):
+        print("Invalid signature")
+        return
+    request_type = request.headers["X-GitHub-Event"]
+    user = payload["sender"]["login"]
+    if request_type == "pull_request":
+        action = handle_pr(payload)
     elif request_type == "issues":
-        return handle_issue(payload)
+        action = handle_issue(payload)
+    else:
+        return
+    # TODO: Implement adding to db
+    print(user, action)
 
 
 def handle_pr(payload):
-    user = payload["sender"]["login"]
     action = payload["action"]
     if action == "opened":
-        action = f"pr_{action}"
+        action = PR.OPENED
     elif action == "closed":
         if payload["pull_request"]["merged"]:
-            action = "pr_merged"
+            action = PR.MERGED
         else:
-            action = "pr_closed"
+            action = PR.CLOSED
     elif action == "reopened":
-        action = "pr_reopened"
-    return {"user": user, "action": action}
+        action = PR.REOPENED
+    return action
 
 
 def handle_issue(payload):
-    user = payload["sender"]["login"]
     action = payload["action"]
     if action == "opened":
-        action = "issue_opened"
+        action = Issue.OPENED
     elif action == "closed":
         if payload["issue"]["state_reason"] == "completed":
-            action = "issue_completed"
+            action = Issue.COMPLETED
         elif payload["issue"]["state_reason"] == "not_planned":
-            action = "issue_not_planned"
-    return {"user": user, "action": action}
+            action = Issue.NOT_PLANNED
+    return action
+
+
+def verify_secret(secret, payload, signature_header):
+    hash_object = hmac.new(
+        secret.encode("utf-8"), msg=payload, digestmod=hashlib.sha256
+    )
+    expected_signature = f"sha256={hash_object.hexdigest()}"
+    return hmac.compare_digest(expected_signature, signature_header)

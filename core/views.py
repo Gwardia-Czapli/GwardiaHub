@@ -32,4 +32,7 @@ def profile(request, name: str):
 @csrf_exempt
 @require_POST
 def gh_webhook(request):
-    return HttpResponse(handle_webhook(request))
+    try:
+        return HttpResponse(handle_webhook(request))
+    except KeyError:
+        return HttpResponse("Invalid request")
