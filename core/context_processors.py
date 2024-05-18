@@ -1,4 +1,7 @@
 SIDEBAR_LINKS = {
+    "Genshin": [
+        {"name": "Genshin", "url": "/genshin", "icon": "gamepad"},
+    ],
     "Gwardia": [
         {
             "name": "Spotkania",
