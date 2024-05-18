@@ -46,7 +46,7 @@ def handle_pr(payload, action):
     if action == "opened":
         action = PR.OPENED
     elif action == "closed":
-        if ["pull_request"]["merged"]:
+        if payload["pull_request"]["merged"]:
             action = PR.MERGED
         else:
             action = PR.CLOSED
