@@ -25,6 +25,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
 ]
 
+handler403 = "core.views.handling_403"
 handler404 = "core.views.handling_404"
-
 handler500 = "core.views.handling_500"
