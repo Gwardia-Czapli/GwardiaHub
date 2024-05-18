@@ -20,6 +20,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path("", include("core.urls")),
+    path("genshin", include("genshin.urls")),
     path("panel/", include("gwardia.urls")),
     path("admin/", admin.site.urls),
 ]
