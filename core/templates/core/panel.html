@@ -8,7 +8,8 @@
     <nav class="flex flex-nowrap justify-between w-full p-1 bg-gray-950 border-b border-gray-600 text-gray-300">
         <div class="flex flex-nowrap items-center gap-4">
             <a href="https://github.com/Gwardia-Czapli/GwardiaHub" class="flex items-center transition-colors duration-300 ml-2 md:ml-5 hover:text-blue-100" target="_blank">
-                <span class="fa-brands fa-github fa-2x"></span>
+                {% load static %}
+                <img src="{% static 'images/logo.svg' %}" class="w-10">
             </a>
             <a href="https://github.com/Gwardia-Czapli/GwardiaHub" class="text-md md:text-xl font-bold">GwardiaHub</a>
         </div>
