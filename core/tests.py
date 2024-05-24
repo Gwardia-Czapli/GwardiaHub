@@ -1,16 +1,7 @@
 import json
 from django.test import TestCase
-import hmac
-import hashlib
 
-from core.gh_webhook_handling import verify_secret
-
-
-def generate_signature(secret, payload):
-    hash_object = hmac.new(
-        secret.encode("utf-8"), msg=payload, digestmod=hashlib.sha256
-    )
-    return f"sha256={hash_object.hexdigest()}"
+from core.gh_webhook_handling import verify_secret, generate_signature
 
 
 class GHWebhookTestCase(TestCase):

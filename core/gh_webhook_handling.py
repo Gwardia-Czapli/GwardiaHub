@@ -67,9 +67,13 @@ def handle_issue(payload, action):
     return action
 
 
-def verify_secret(secret, payload, signature_header):
+def generate_signature(secret, payload):
     hash_object = hmac.new(
         secret.encode("utf-8"), msg=payload, digestmod=hashlib.sha256
     )
-    expected_signature = f"sha256={hash_object.hexdigest()}"
+    return f"sha256={hash_object.hexdigest()}"
+
+
+def verify_secret(secret, payload, signature_header):
+    expected_signature = generate_signature(secret, payload)
     return hmac.compare_digest(expected_signature, signature_header)
