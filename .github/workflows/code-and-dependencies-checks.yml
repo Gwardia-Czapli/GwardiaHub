@@ -1,8 +1,8 @@
-name: Code quality checks
+name: Code and dependencies checks
 on: push
 
 jobs:
-  ruff-lint:
+  code-style-checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,18 +13,30 @@ jobs:
         uses: chartboost/ruff-action@v1
         with:
           args: check
-  poetry-checks:
+  dependencies-and-code-tests:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: gwardiahub
+          POSTGRES_PASSWORD: root
+          POSTGRES_USER: root
+        ports:
+          - 5432:5432
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: 3.11
-      - name: Run image
+      - name: Install poetry
         uses: abatilo/actions-poetry@v3
         with:
           poetry-version: 1.8
       - name: Check dependencies with poetry
-        run:
+        run: |
+          poetry install
           poetry update
-          poetry checks
+          poetry check
+      - name: Run Django tests
+        run: poetry run python manage.py test
