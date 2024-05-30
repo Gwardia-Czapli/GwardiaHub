@@ -3,6 +3,9 @@
 tailwind.config = {
       theme: {
         extend: {
+            fontFamily: {
+              inter: ['Inter', 'sans-serif'],
+          },
           borderWidth: {
             '12': '12px',
           },

@@ -17,8 +17,6 @@
         <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
         <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
         <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
@@ -26,7 +24,7 @@
         {% block head %}
         {% endblock %}
     </head>
-    <body style="  font-family: Inter, sans-serif; font-optical-sizing: auto; font-style: normal;" class="bg-gray-900 text-gray-50">
+    <body class="bg-gray-900 text-gray-50 font-inter">
         <main class="flex flex-col h-screen w-screen">
             {% language 'pl-pl' %}
                 {% block content %}
