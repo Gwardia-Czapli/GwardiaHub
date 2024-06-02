@@ -1,3 +1,5 @@
+from core.discord_auth import user_logged_in
+
 SIDEBAR_LINKS = {
     "Genshin": [
         {"name": "Genshin", "url": "/genshin", "icon": "gamepad"},
@@ -25,4 +27,12 @@ SIDEBAR_LINKS = {
 
 
 def sidebar_links(request):
-    return {"sidebar_links": SIDEBAR_LINKS}
+    user = user_logged_in(request)
+    if user is None:
+        return {}
+    links = {}
+    for role in user.roles.all():
+        if SIDEBAR_LINKS.get(role.permissions) is None:
+            continue
+        links[role.permissions] = SIDEBAR_LINKS.get(role.permissions)
+    return {"sidebar_links": links}

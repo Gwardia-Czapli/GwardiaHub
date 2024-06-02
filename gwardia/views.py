@@ -13,7 +13,7 @@ def index(request, _user):
     return redirect("gwardia:meetings")
 
 
-@require_user()
+@require_user("Gwardia")
 def meetings(request, user: User):
     upcoming_meetings = Meeting.objects.filter(date__gte=timezone.now()).order_by(
         "-date"
@@ -24,6 +24,6 @@ def meetings(request, user: User):
     context = {
         "upcoming_meetings": upcoming_meetings,
         "archival_meetings": archival_meetings,
-        user: user.to_json(),
+        "user": user.to_json(),
     }
     return render(request, "gwardia/meetings.html", context)

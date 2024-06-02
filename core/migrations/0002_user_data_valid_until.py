@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             name="data_valid_until",
             field=models.DateTimeField(
                 default=datetime.datetime(
-                    2024, 5, 8, 9, 45, 28, 581656, tzinfo=datetime.timezone.utc
+                    1971, 1, 1, 0, 0, tzinfo=datetime.timezone.utc
                 )
             ),
         ),

@@ -2,6 +2,7 @@ from urllib.parse import urlencode
 
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
+from django.templatetags.static import static
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
@@ -38,7 +39,7 @@ def index(request):
     return render(request, "core/index.html", context)
 
 
-@require_user(required_role_id=None)
+@require_user()
 def profile(request, user, name: str = None):
     try:
         user = User.objects.get(username=name)
@@ -99,7 +100,7 @@ def gh_webhook(request):
         return HttpResponse("Invalid request", status=500)
 
 
-@require_user(required_role_id=None)
+@require_user()
 @require_POST
 def logout(request, _user):
     return reset_cookies(redirect("core:index"))

@@ -11,7 +11,6 @@ from core.discord_api import (
     DISCORD_ID_COOKIE,
 )
 from core.models import User, UserRole
-from gwardia_hub.settings import MEMBER_ROLE_ID
 
 
 def user_logged_in(request: HttpRequest) -> User | None:
@@ -46,12 +45,12 @@ def require_no_user():
     return decorator
 
 
-def require_user(required_role_id: str | None = MEMBER_ROLE_ID):
+def require_user(required_permissions: str = None):
     """Decorator that checks if a user is logged in and has the required role.
 
     Adds a second positional argument to the decorated function containting the guild member.
 
-    :param required_role_id: A role ID required for the user to be authorised. Defaults to MEMBER_ROLE_ID.
+    :param required_permissions: The required permissions.
     """
 
     def decorator(func):
@@ -61,9 +60,8 @@ def require_user(required_role_id: str | None = MEMBER_ROLE_ID):
             if not user:
                 return temporary_redirect("core:discord_refresh", request)
             try:
-                required_role = UserRole.objects.get(id=required_role_id)
-                if not user.roles.contains(required_role):
-                    return set_id_cookie(HttpResponse("Unauthorized", status=401), user)
+                if not user.has_permission(required_permissions):
+                    return redirect("core:profile", request)
             except UserRole.DoesNotExist:
                 pass
 
