@@ -2,6 +2,9 @@
 
 tailwind.config = {
       theme: {
+        module.exports = {
+          darkMode: 'class',
+          }
         extend: {
             fontFamily: {
               inter: ['Inter', 'sans-serif'],
