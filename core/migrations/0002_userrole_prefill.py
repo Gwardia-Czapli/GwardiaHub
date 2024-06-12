@@ -23,7 +23,7 @@ def remove_default_roles(apps, schema_editor):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("core", "0003_userrole_permissions"),
+        ("core", "0001_users_initial"),
     ]
 
     operations = [migrations.RunPython(create_default_roles, remove_default_roles)]

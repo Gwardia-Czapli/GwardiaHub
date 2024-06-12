@@ -32,7 +32,8 @@ def sidebar_links(request):
         return {}
     links = {}
     for role in user.roles.all():
-        if SIDEBAR_LINKS.get(role.permissions) is None:
+        permission_sidebar = SIDEBAR_LINKS.get(role.permissions)
+        if permission_sidebar is None:
             continue
-        links[role.permissions] = SIDEBAR_LINKS.get(role.permissions)
+        links[role.permissions] = permission_sidebar
     return {"sidebar_links": links}

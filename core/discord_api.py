@@ -4,7 +4,6 @@ import requests
 from django.core.handlers.wsgi import WSGIRequest
 from django.urls import reverse
 from django.utils import timezone
-from requests import HTTPError
 from requests.exceptions import JSONDecodeError
 
 from core.models import User, UserRole
@@ -34,9 +33,7 @@ def authorise_code(request: WSGIRequest) -> dict[str, str] | None:
         headers=headers,
         auth=(CLIENT_ID, CLIENT_SECRET),
     )
-    try:
-        response.raise_for_status()
-    except HTTPError:
+    if not response.ok:
         return None
     return response.json()
 
@@ -56,18 +53,8 @@ def refresh_access_token(refresh_token):
 
 
 def fetch_user(access_token: str) -> User | None:
-    headers = {
-        "Authorization": f"Bearer {access_token}",
-    }
-    response = requests.get(
-        f"{API_ENDPOINT}/oauth2/@me",
-        headers=headers,
-    )
-    if not response.ok:
-        return None
-    try:
-        json = response.json()
-    except JSONDecodeError:
+    json = json_api_get("/oauth2/@me", access_token)
+    if json is None:
         return None
 
     user = User.objects.get_or_create(discord_id=json["user"]["id"])[0]
@@ -86,20 +73,10 @@ def fetch_user_details(access_token: str) -> bool:
     :param access_token: access token for Discord API
     :return: True if data was fetched successfully
     """
+    json = json_api_get(f"/users/@me/guilds/{GUILD_ID}/member", access_token)
+    if json is None:
+        return False
 
-    headers = {
-        "Authorization": f"Bearer {access_token}",
-    }
-    response = requests.get(
-        f"{API_ENDPOINT}/users/@me/guilds/{GUILD_ID}/member",
-        headers=headers,
-    )
-    if not response.ok:
-        return False
-    try:
-        json = response.json()
-    except JSONDecodeError:
-        return False
     user = User.objects.get_or_create(discord_id=json["user"]["id"])[0]
     for role_id in json["roles"]:
         try:
@@ -108,3 +85,19 @@ def fetch_user_details(access_token: str) -> bool:
         except UserRole.DoesNotExist:
             pass
     return True
+
+
+def json_api_get(endpoint: str, access_token: str):
+    headers = {
+        "Authorization": f"Bearer {access_token}",
+    }
+    response = requests.get(
+        f"{API_ENDPOINT}{endpoint}",
+        headers=headers,
+    )
+    if not response.ok:
+        return None
+    try:
+        return response.json()
+    except JSONDecodeError:
+        return None

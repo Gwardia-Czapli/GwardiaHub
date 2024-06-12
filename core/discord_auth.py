@@ -14,22 +14,19 @@ from core.models import User, UserRole
 
 
 def user_logged_in(request: HttpRequest) -> User | None:
-    """Returns user if logged in. If not, returns 0 when session should be refreshed or 1 when session is invalid."""
+    """Returns user if logged in."""
     token = request.COOKIES.get(DISCORD_TOKEN_COOKIE)
     if token is None:
         return None
 
-    discord_id = request.COOKIES.get(DISCORD_ID_COOKIE)
+    discord_id = int(request.COOKIES.get(DISCORD_ID_COOKIE))
+    fetched_user = fetch_user(token)
     if discord_id is None:
-        user = fetch_user(token)
-    else:
-        try:
-            user = User.objects.get(discord_id=discord_id)
-            if fetch_user(token) != user:
-                return None
-        except User.DoesNotExist or ValueError:
-            return None
-    return user
+        return fetched_user
+    elif fetched_user.discord_id != discord_id:
+        print(fetched_user.discord_id, discord_id)
+        return None
+    return User.objects.get(discord_id=discord_id)
 
 
 def require_no_user():
