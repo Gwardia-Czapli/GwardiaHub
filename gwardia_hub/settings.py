@@ -137,3 +137,8 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Discord Auth
+CLIENT_ID = env("CLIENT_ID", default=1232028303146090628)
+CLIENT_SECRET = env("CLIENT_SECRET", default="empty-client-secret")
+GUILD_ID = env("GUILD_ID", default=1148506821531807794)
